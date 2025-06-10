@@ -90,7 +90,7 @@ Here's a simplified overview of how the project files are organized:
     ├── ConnectDeviceScreen.tsx
     └── SettingsScreen.tsx
 ```
-The `contexts/ThemeContext.tsx` and `services/geminiService.ts` files have been removed as their related features (theme switching and AI integration) are no longer part of the application.
+The `services/geminiService.ts` file has been removed as its related feature (AI integration) is no longer part of the application.
 
 ## Getting Started
 

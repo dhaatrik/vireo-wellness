@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import { useAppContext } from '../contexts/AppContext';
 import { FoodItem, SelectedFoodItem, MealType } from '../types';
-import { SearchIcon, CheckCircleIcon, CircleIcon, FilterIcon } from '../components/Icons';
+import { SearchIcon, CheckCircleIcon, CircleIcon } from '../components/Icons';
 
 type TabName = "Recently added" | "Meals" | "Recipes";
 
@@ -110,9 +110,6 @@ const AddMealScreen: React.FC = () => {
             className="w-full bg-slate-700 text-slate-100 placeholder-slate-500 p-3 pl-10 rounded-lg focus:ring-1 focus:ring-emerald-500 focus:outline-none shadow-sm"
           />
           <SearchIcon className="w-5 h-5 text-slate-500 absolute left-3 top-1/2 transform -translate-y-1/2" />
-          <button className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 text-slate-400 hover:text-slate-100">
-            <FilterIcon className="w-5 h-5" />
-          </button>
         </div>
       </div>
 

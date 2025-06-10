@@ -47,13 +47,7 @@ const DashboardScreen: React.FC = () => {
     <div className="flex flex-col h-full">
       <Header 
         title={`Hi, ${user.name}!`}
-        rightContent={
-          <div className="flex items-center space-x-3">
-            <button className="p-1 text-slate-300 hover:text-slate-100 transition-colors duration-150" aria-label="Notifications">
-              <BellIcon className="w-6 h-6" />
-            </button>
-          </div>
-        }
+        rightContent={null}
       />
       <main className="flex-grow overflow-y-auto p-4 space-y-4 bg-slate-800 transition-colors duration-300">
         {/* Eaten Stats Card */}
@@ -124,20 +118,6 @@ const DashboardScreen: React.FC = () => {
         
         <BloodSugarChart data={bloodSugarData} />
 
-        <div className="space-y-3">
-            <button className="w-full bg-slate-700 p-4 rounded-lg shadow text-left hover:bg-slate-600 transition-colors duration-300">
-                <div className="flex justify-between items-center">
-                    <span className="font-medium text-slate-100">Select a day</span>
-                    <ChevronRightIcon className="w-5 h-5 text-slate-400" />
-                </div>
-            </button>
-             <button className="w-full bg-slate-700 p-4 rounded-lg shadow text-left hover:bg-slate-600 transition-colors duration-300">
-                <div className="flex justify-between items-center">
-                    <span className="font-medium text-slate-100">Yesterday</span>
-                    <ChevronRightIcon className="w-5 h-5 text-slate-400" />
-                </div>
-            </button>
-        </div>
       </main>
       <BottomNav />
     </div>

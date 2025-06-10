@@ -80,11 +80,7 @@ const DailyMealsScreen: React.FC = () => {
         title="Daily meals" 
         showBackButton 
         backPath="/dashboard"
-        rightContent={
-          <button className="p-1 text-slate-300 hover:text-slate-100">
-            <CalendarIcon className="w-6 h-6" />
-          </button>
-        }
+        rightContent={null}
       />
       <DatePicker selectedDate={selectedDate} onDateChange={setSelectedDate} />
       

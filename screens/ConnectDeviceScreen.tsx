@@ -98,9 +98,6 @@ const ConnectDeviceScreen: React.FC = () => {
             >
                 {isConnecting ? `Connecting... ${connectionProgress}%` : 'Add this Device'}
             </button>
-            <button className="mt-4 text-sm text-slate-400 hover:text-slate-200">
-                Need help?
-            </button>
         </div>
       </main>
     </div>

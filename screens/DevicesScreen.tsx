@@ -11,10 +11,9 @@ import { getDeviceIcon } from '../constants';
 
 interface DeviceListItemProps {
   device: Device;
-  onConnect: (deviceId: string) => void;
 }
 
-const DeviceListItem: React.FC<DeviceListItemProps> = ({ device, onConnect }) => {
+const DeviceListItem: React.FC<DeviceListItemProps> = ({ device }) => {
   const navigate = useNavigate();
   
   const handleItemClick = () => {
@@ -73,7 +72,7 @@ const DevicesScreen: React.FC = () => {
             <h2 className="text-sm font-semibold text-slate-400 mb-3 px-1">Connected</h2>
             <div className="space-y-3">
               {connectedDevices.map(device => (
-                <DeviceListItem key={device.id} device={device} onConnect={connectDevice} />
+                <DeviceListItem key={device.id} device={device} />
               ))}
             </div>
           </section>
@@ -84,7 +83,7 @@ const DevicesScreen: React.FC = () => {
             <h2 className="text-sm font-semibold text-slate-400 mb-3 px-1">Available to connect</h2>
             <div className="space-y-3">
               {availableToConnect.map(device => (
-                <DeviceListItem key={device.id} device={device} onConnect={connectDevice} />
+                <DeviceListItem key={device.id} device={device} />
               ))}
             </div>
           </section>
