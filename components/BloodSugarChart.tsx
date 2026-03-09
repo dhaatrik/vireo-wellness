@@ -7,10 +7,12 @@ interface BloodSugarChartProps {
   data: BloodSugarReading[];
 }
 
+const timeFormatter = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit' });
+
 const BloodSugarChart: React.FC<BloodSugarChartProps> = ({ data }) => {
   const formattedData = data.map(reading => ({
     ...reading,
-    time: new Date(reading.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    time: timeFormatter.format(new Date(reading.timestamp)),
     beforeMeal: reading.type === 'before_meal' ? reading.value : null,
     afterMeal: reading.type === 'after_meal' ? reading.value : null,
   }));
