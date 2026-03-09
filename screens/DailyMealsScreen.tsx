@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
+import { isSameDay } from 'date-fns';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import DatePicker from '../components/DatePicker';
@@ -160,14 +161,6 @@ const DailyMealsScreen: React.FC = () => {
       </div>
       <BottomNav />
     </div>
-  );
-};
-
-const isSameDay = (date1: Date, date2: Date) => {
-  return (
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
   );
 };
 

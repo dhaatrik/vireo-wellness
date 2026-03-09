@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
+import { isSameDay } from 'date-fns';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import DatePicker from '../components/DatePicker';
@@ -12,14 +13,6 @@ const DailyMedicationsScreen: React.FC = () => {
     const navigate = useNavigate();
     const { medicationEntries } = useAppContext();
     const [selectedDate, setSelectedDate] = useState(new Date());
-
-    const isSameDay = (date1: Date, date2: Date) => {
-        return (
-            date1.getFullYear() === date2.getFullYear() &&
-            date1.getMonth() === date2.getMonth() &&
-            date1.getDate() === date2.getDate()
-        );
-    };
 
     const entriesForSelectedDate = medicationEntries.filter(entry =>
         isSameDay(new Date(entry.takenAt), selectedDate)
