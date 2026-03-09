@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import Header from '../components/Header';
 import { useAppContext } from '../contexts/AppContext';
-import { FoodItem, SelectedFoodItem, MealType } from '../types';
+import { SelectedFoodItem, MealType } from '../types';
 import { Search, CheckCircle2, Circle, SlidersHorizontal } from 'lucide-react';
 
 type TabName = "Recently added" | "Meals" | "Recipes";
