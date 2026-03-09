@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
-import { TrendingUp, Activity, Calendar, Clock } from 'lucide-react';
+import { TrendingUp, Activity, Clock } from 'lucide-react';
 
 const mockWeeklyData = [
   { day: 'Mon', avgGlucose: 110, inRange: 85 },

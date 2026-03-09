@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
-import { Settings, Activity, Scale, Bell, Shield, LogOut, ChevronRight, User, Mail, Phone, Edit2, Check, ChevronDown, Download, Clock, Droplet, Pill, Trash2, Plus } from 'lucide-react';
+import { Settings, Activity, Scale, Bell, Shield, LogOut, ChevronRight, User, Mail, Phone, Edit2, Check, ChevronDown, Download, Droplet, Pill, Trash2, Plus } from 'lucide-react';
 import { Reminder } from '../types';
 import { useAppContext } from '../contexts/AppContext';
 

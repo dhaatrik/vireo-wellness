@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import DatePicker from '../components/DatePicker';
+import { isSameDay } from 'date-fns';
 import { useAppContext } from '../contexts/AppContext';
 import { MedicationEntry } from '../types';
 import { Calendar, Plus, Pill } from 'lucide-react';
