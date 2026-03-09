@@ -70,8 +70,9 @@ const AddMealScreen: React.FC = () => {
   }, [allFoodItems, selectedItems]);
 
   const filteredFoodItems = useMemo(() => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
     return foodItemsWithSelection.filter(item =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      item.name.toLowerCase().includes(lowerSearchTerm)
     );
   }, [foodItemsWithSelection, searchTerm]);
 
