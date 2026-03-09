@@ -78,7 +78,8 @@ const DashboardScreen: React.FC = () => {
 
   const eatenPercentage = (stats.eatenGL / stats.totalGL) * 100;
 
-  const pillsTakenToday = medicationEntries.filter(e => isSameDay(new Date(e.takenAt), new Date())).length;
+  const today = new Date();
+  const pillsTakenToday = medicationEntries.filter(e => isSameDay(new Date(e.takenAt), today)).length;
 
   const handleWaterAdd = () => setWaterIntake(waterIntake + 1);
   const handleWaterRemove = () => setWaterIntake(Math.max(0, waterIntake - 1));
