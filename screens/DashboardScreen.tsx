@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Header from '../components/Header';
@@ -74,6 +74,13 @@ const DashboardScreen: React.FC = () => {
 
   useEffect(() => {
     localStorage.setItem('dashboardWidgets', JSON.stringify(widgets));
+  }, [widgets]);
+
+  const widgetMap = useMemo(() => {
+    return widgets.reduce((acc, widget) => {
+      acc[widget.id] = widget;
+      return acc;
+    }, {} as Record<string, WidgetConfig>);
   }, [widgets]);
 
   const eatenPercentage = (stats.eatenGL / stats.totalGL) * 100;
@@ -260,15 +267,18 @@ const DashboardScreen: React.FC = () => {
         />
         <main className="flex-1 overflow-y-auto p-5 pb-24 md:pb-5">
 
-          {widgets.find(w => w.id === 'eaten') && renderWidget(widgets.find(w => w.id === 'eaten')!, 0.1)}
-          {widgets.find(w => w.id === 'water') && renderWidget(widgets.find(w => w.id === 'water')!, 0.2)}
+          {widgetMap['eaten'] && renderWidget(widgetMap['eaten'], 0.1)}
+          {widgetMap['water'] && renderWidget(widgetMap['water'], 0.2)}
 
           {/* Grid Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {widgets.filter(w => ['glucose', 'pills', 'activity', 'carbs'].includes(w.id)).map((widget, index) => renderWidget(widget, 0.1 * (index + 3)))}
+            {['glucose', 'pills', 'activity', 'carbs']
+              .map(id => widgetMap[id])
+              .filter(Boolean)
+              .map((widget, index) => renderWidget(widget, 0.1 * (index + 3)))}
           </div>
 
-          {widgets.find(w => w.id === 'chart') && renderWidget(widgets.find(w => w.id === 'chart')!, 0.6)}
+          {widgetMap['chart'] && renderWidget(widgetMap['chart'], 0.6)}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
