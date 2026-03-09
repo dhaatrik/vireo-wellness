@@ -17,6 +17,7 @@ const COUNTRIES = [
 const ProfileSection: React.FC = () => {
   const { userProfile, updateUserProfile } = useAppContext();
 
+  // Profile state
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [profileData, setProfileData] = useState({
     name: userProfile.name,
