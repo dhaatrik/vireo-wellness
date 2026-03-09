@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import DatePicker from '../components/DatePicker';
+import { isSameDay } from 'date-fns';
 import { useAppContext } from '../contexts/AppContext';
 import { DailyMealGroup, MealEntry, MealType } from '../types';
 import { Calendar, ChevronDown, ChevronUp, Plus, Flame } from 'lucide-react';
@@ -160,14 +161,6 @@ const DailyMealsScreen: React.FC = () => {
       </div>
       <BottomNav />
     </div>
-  );
-};
-
-const isSameDay = (date1: Date, date2: Date) => {
-  return (
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
   );
 };
 

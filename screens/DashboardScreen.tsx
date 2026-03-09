@@ -9,14 +9,7 @@ import CustomizeDashboardModal, { WidgetConfig } from '../components/CustomizeDa
 import { MOCK_DASHBOARD_STATS, MOCK_BLOOD_SUGAR_READINGS } from '../constants';
 import { Bell, Droplet, Pill, Footprints, Flame, ChevronRight, Settings2, Flame as FlameIcon, Plus, Minus } from 'lucide-react';
 import { useAppContext } from '../contexts/AppContext';
-
-const isSameDay = (date1: Date, date2: Date) => {
-  return (
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
-  );
-};
+import { isSameDay } from 'date-fns';
 
 interface StatCardProps {
   icon: React.ElementType;
