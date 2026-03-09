@@ -1,6 +1,5 @@
 
-import { FoodItem, Device, BloodSugarReading, DashboardStats, User, DailyMealGroup, MealType, MealEntry } from './types';
-import React from 'react';
+import { FoodItem, Device, BloodSugarReading, DashboardStats, User, DailyMealGroup, MealType, MealEntry, Medication, MedicationEntry, Reminder } from './types';
 
 export const MOCK_USER: User = {
   name: 'Rohit Kumar',
@@ -19,23 +18,42 @@ export const MOCK_FOOD_ITEMS: FoodItem[] = [
 ];
 
 export const MOCK_MEAL_ENTRIES: MealEntry[] = [
-    { id: 'me1', foodItem: MOCK_FOOD_ITEMS[0], quantity: 1, loggedAt: new Date().toISOString() },
-    { id: 'me2', foodItem: MOCK_FOOD_ITEMS[1], quantity: 2, loggedAt: new Date().toISOString() },
+  { id: 'me1', foodItem: MOCK_FOOD_ITEMS[0], quantity: 1, loggedAt: new Date().toISOString() },
+  { id: 'me2', foodItem: MOCK_FOOD_ITEMS[1], quantity: 2, loggedAt: new Date().toISOString() },
+];
+
+export const MOCK_MEDICATIONS: Medication[] = [
+  { id: '1', name: 'Metformin', dosage: '500mg', form: 'pill', description: 'Take with typical meals.' },
+  { id: '2', name: 'Lisinopril', dosage: '10mg', form: 'pill', description: 'For blood pressure control.' },
+  { id: '3', name: 'Albuterol', dosage: '2 puffs', form: 'inhaler', description: 'As needed for shortness of breath.' },
+  { id: '4', name: 'Insulin Glargine', dosage: '15 units', form: 'injection', description: 'Once daily at bedtime.' },
+];
+
+export const MOCK_MEDICATION_ENTRIES: MedicationEntry[] = [
+  { id: 'mede1', medication: MOCK_MEDICATIONS[0], takenAt: new Date(new Date().setHours(8, 0, 0, 0)).toISOString() },
+  { id: 'mede2', medication: MOCK_MEDICATIONS[1], takenAt: new Date(new Date().setHours(8, 0, 0, 0)).toISOString() },
+];
+
+export const MOCK_REMINDERS: Reminder[] = [
+  { id: 'rem1', type: 'medication', time: '08:00', message: 'Morning Medications', isActive: true },
+  { id: 'rem2', type: 'medication', time: '20:00', message: 'Evening Medications', isActive: true },
+  { id: 'rem3', type: 'water', time: '10:00', message: 'Drink a glass of water', isActive: true },
+  { id: 'rem4', type: 'glucose', time: '14:00', message: 'Post-lunch Glucose Check', isActive: false },
 ];
 
 export const MOCK_DAILY_MEALS_TODAY: DailyMealGroup[] = [
   {
     mealType: MealType.BREAKFAST,
     entries: [
-      { id: 'me1b', foodItem: MOCK_FOOD_ITEMS[0], quantity: 1, loggedAt: new Date(new Date().setHours(8,0,0,0)).toISOString() },
-      { id: 'me2b', foodItem: MOCK_FOOD_ITEMS[1], quantity: 2, loggedAt: new Date(new Date().setHours(8,5,0,0)).toISOString() },
+      { id: 'me1b', foodItem: MOCK_FOOD_ITEMS[0], quantity: 1, loggedAt: new Date(new Date().setHours(8, 0, 0, 0)).toISOString() },
+      { id: 'me2b', foodItem: MOCK_FOOD_ITEMS[1], quantity: 2, loggedAt: new Date(new Date().setHours(8, 5, 0, 0)).toISOString() },
     ],
     totalCalories: MOCK_FOOD_ITEMS[0].calories + MOCK_FOOD_ITEMS[1].calories * 2,
   },
   {
     mealType: MealType.SNACK,
     entries: [
-      { id: 'me3s', foodItem: MOCK_FOOD_ITEMS[3], quantity: 1, loggedAt: new Date(new Date().setHours(10,30,0,0)).toISOString() },
+      { id: 'me3s', foodItem: MOCK_FOOD_ITEMS[3], quantity: 1, loggedAt: new Date(new Date().setHours(10, 30, 0, 0)).toISOString() },
     ],
     totalCalories: MOCK_FOOD_ITEMS[3].calories,
   },
@@ -61,7 +79,9 @@ export const MOCK_DASHBOARD_STATS: DashboardStats = {
   eatenGL: 24, // GL often refers to Glycemic Load, can be similar to calories in this context or a specific unit
   totalGL: 64,
   glucose: 136, // mg/dL
-  pillsTaken: 1, // Example
+  pillsTaken: 2, // Example
   activitySteps: 244,
   carbsIntake: 522, // Example, this seems high, adjust if it's daily total
+  waterIntake: 3, // Initial mock water intake
+  dailyWaterGoal: 8, // Goal for daily glasses
 };

@@ -25,6 +25,29 @@ export interface MealEntry {
   loggedAt: string; // ISO timestamp
 }
 
+export interface Medication {
+  id: string;
+  name: string;
+  dosage: string; // e.g., '10mg', '2 puffs'
+  form: 'pill' | 'liquid' | 'inhaler' | 'injection';
+  imageUrl?: string;
+  description?: string;
+}
+
+export interface MedicationEntry {
+  id: string;
+  medication: Medication;
+  takenAt: string; // ISO timestamp
+}
+
+export interface Reminder {
+  id: string;
+  type: 'medication' | 'water' | 'glucose' | 'other';
+  time: string; // HH:mm format
+  message: string;
+  isActive: boolean;
+}
+
 export interface DailyMealGroup {
   mealType: MealType;
   entries: MealEntry[];
@@ -51,9 +74,11 @@ export interface DashboardStats {
   eatenGL: number;
   totalGL: number;
   glucose: number;
-  pillsTaken: number; // Placeholder
+  pillsTaken: number;
   activitySteps: number;
   carbsIntake: number; // grams
+  waterIntake: number; // glasses/bottles
+  dailyWaterGoal: number; // glasses/bottles
 }
 
 export interface User {

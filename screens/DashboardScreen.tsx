@@ -7,21 +7,29 @@ import BottomNav from '../components/BottomNav';
 import BloodSugarChart from '../components/BloodSugarChart';
 import CustomizeDashboardModal, { WidgetConfig } from '../components/CustomizeDashboardModal';
 import { MOCK_DASHBOARD_STATS, MOCK_BLOOD_SUGAR_READINGS } from '../constants';
-import { Bell, Droplet, Pill, Footprints, Flame, ChevronRight, Settings2, Flame as FlameIcon } from 'lucide-react';
+import { Bell, Droplet, Pill, Footprints, Flame, ChevronRight, Settings2, Flame as FlameIcon, Plus, Minus } from 'lucide-react';
 import { useAppContext } from '../contexts/AppContext';
+
+const isSameDay = (date1: Date, date2: Date) => {
+  return (
+    date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  );
+};
 
 interface StatCardProps {
   icon: React.ElementType;
   label: string;
   value: string;
-  colorClass: string; 
+  colorClass: string;
   bgClass: string;
   onClick?: () => void;
   delay?: number;
 }
 
 const StatCard: React.FC<StatCardProps> = ({ icon: Icon, label, value, colorClass, bgClass, onClick, delay = 0 }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay, duration: 0.4, ease: "easeOut" }}
@@ -44,6 +52,7 @@ const StatCard: React.FC<StatCardProps> = ({ icon: Icon, label, value, colorClas
 
 const DEFAULT_WIDGETS: WidgetConfig[] = [
   { id: 'eaten', title: 'Eaten Summary', visible: true },
+  { id: 'water', title: 'Water Intake', visible: true },
   { id: 'glucose', title: 'Glucose Stat', visible: true },
   { id: 'pills', title: 'Pills Stat', visible: true },
   { id: 'activity', title: 'Activity Stat', visible: true },
@@ -53,10 +62,10 @@ const DEFAULT_WIDGETS: WidgetConfig[] = [
 
 const DashboardScreen: React.FC = () => {
   const navigate = useNavigate();
-  const { userProfile } = useAppContext();
+  const { userProfile, waterIntake, setWaterIntake, medicationEntries } = useAppContext();
   const stats = MOCK_DASHBOARD_STATS;
   const bloodSugarData = MOCK_BLOOD_SUGAR_READINGS;
-  
+
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
   const [widgets, setWidgets] = useState<WidgetConfig[]>(() => {
     const saved = localStorage.getItem('dashboardWidgets');
@@ -69,13 +78,18 @@ const DashboardScreen: React.FC = () => {
 
   const eatenPercentage = (stats.eatenGL / stats.totalGL) * 100;
 
+  const pillsTakenToday = medicationEntries.filter(e => isSameDay(new Date(e.takenAt), new Date())).length;
+
+  const handleWaterAdd = () => setWaterIntake(waterIntake + 1);
+  const handleWaterRemove = () => setWaterIntake(Math.max(0, waterIntake - 1));
+
   const renderWidget = (widget: WidgetConfig, delay: number) => {
     if (!widget.visible) return null;
 
     switch (widget.id) {
       case 'eaten':
         return (
-          <motion.div 
+          <motion.div
             key="eaten"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -116,13 +130,41 @@ const DashboardScreen: React.FC = () => {
             </div>
           </motion.div>
         );
+      case 'water':
+        return (
+          <motion.div
+            key="water"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay }}
+            className="bg-slate-900 border border-slate-800 p-5 rounded-3xl mb-6 flex justify-between items-center"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-blue-500/10 rounded-2xl">
+                <Droplet className="w-8 h-8 text-blue-400" />
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-slate-400">Water Intake</h3>
+                <p className="text-xl font-bold text-white tracking-tight">{waterIntake} <span className="text-sm text-blue-400">glasses</span></p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <button onClick={handleWaterRemove} className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-colors" aria-label="Remove Water">
+                <Minus className="w-5 h-5" />
+              </button>
+              <button onClick={handleWaterAdd} className="w-10 h-10 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-500/20 transition-all hover:scale-105 active:scale-95" aria-label="Add Water">
+                <Plus className="w-5 h-5" />
+              </button>
+            </div>
+          </motion.div>
+        );
       case 'glucose':
         return (
-          <StatCard 
+          <StatCard
             key="glucose"
             icon={Droplet}
-            label="Glucose" 
-            value={`${stats.glucose} mg/dL`} 
+            label="Glucose"
+            value={`${stats.glucose} mg/dL`}
             colorClass="text-rose-400"
             bgClass="bg-rose-400/10"
             onClick={() => navigate('/daily-meals')}
@@ -131,23 +173,24 @@ const DashboardScreen: React.FC = () => {
         );
       case 'pills':
         return (
-          <StatCard 
+          <StatCard
             key="pills"
             icon={Pill}
-            label="Pills" 
-            value={`${stats.pillsTaken} taken`} 
+            label="Pills"
+            value={`${pillsTakenToday} taken`}
             colorClass="text-cyan-400"
             bgClass="bg-cyan-400/10"
+            onClick={() => navigate('/medications')}
             delay={delay}
           />
         );
       case 'activity':
         return (
-          <StatCard 
+          <StatCard
             key="activity"
             icon={Footprints}
-            label="Activity" 
-            value={`${stats.activitySteps} steps`} 
+            label="Activity"
+            value={`${stats.activitySteps} steps`}
             colorClass="text-amber-400"
             bgClass="bg-amber-400/10"
             delay={delay}
@@ -155,10 +198,10 @@ const DashboardScreen: React.FC = () => {
         );
       case 'carbs':
         return (
-          <StatCard 
+          <StatCard
             key="carbs"
             icon={Flame}
-            label="Carbs" 
+            label="Carbs"
             value={`${stats.carbsIntake} cal`}
             colorClass="text-orange-400"
             bgClass="bg-orange-400/10"
@@ -167,7 +210,7 @@ const DashboardScreen: React.FC = () => {
         );
       case 'chart':
         return (
-          <motion.div 
+          <motion.div
             key="chart"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -189,7 +232,7 @@ const DashboardScreen: React.FC = () => {
   return (
     <div className="flex flex-col md:flex-row h-full bg-slate-950 flex-1 w-full overflow-hidden">
       <div className="flex flex-col flex-1 w-full overflow-hidden order-1 md:order-2">
-        <Header 
+        <Header
           title={
             <div className="flex items-center gap-2">
               <span>Hi, {userProfile.name}!</span>
@@ -199,60 +242,61 @@ const DashboardScreen: React.FC = () => {
               </div>
             </div>
           }
-        rightContent={
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={() => setIsCustomizeOpen(true)}
-              className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200" 
-              aria-label="Customize Dashboard"
-            >
-              <Settings2 className="w-5 h-5" />
-            </button>
-            <button className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200" aria-label="Notifications">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full border-2 border-slate-900"></span>
-            </button>
+          rightContent={
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsCustomizeOpen(true)}
+                className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200"
+                aria-label="Customize Dashboard"
+              >
+                <Settings2 className="w-5 h-5" />
+              </button>
+              <button className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200" aria-label="Notifications">
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full border-2 border-slate-900"></span>
+              </button>
+            </div>
+          }
+        />
+        <main className="flex-1 overflow-y-auto p-5 pb-24 md:pb-5">
+
+          {widgets.find(w => w.id === 'eaten') && renderWidget(widgets.find(w => w.id === 'eaten')!, 0.1)}
+          {widgets.find(w => w.id === 'water') && renderWidget(widgets.find(w => w.id === 'water')!, 0.2)}
+
+          {/* Grid Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {widgets.filter(w => ['glucose', 'pills', 'activity', 'carbs'].includes(w.id)).map((widget, index) => renderWidget(widget, 0.1 * (index + 3)))}
           </div>
-        }
-      />
-      <main className="flex-1 overflow-y-auto p-5 pb-24 md:pb-5">
-        
-        {widgets.find(w => w.id === 'eaten') && renderWidget(widgets.find(w => w.id === 'eaten')!, 0.1)}
 
-        {/* Grid Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {widgets.filter(w => ['glucose', 'pills', 'activity', 'carbs'].includes(w.id)).map((widget, index) => renderWidget(widget, 0.1 * (index + 2)))}
-        </div>
-        
-        {widgets.find(w => w.id === 'chart') && renderWidget(widgets.find(w => w.id === 'chart')!, 0.6)}
+          {widgets.find(w => w.id === 'chart') && renderWidget(widgets.find(w => w.id === 'chart')!, 0.6)}
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.4 }}
-          className="space-y-3 mt-6"
-        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.4 }}
+            className="space-y-3 mt-6"
+          >
             <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group">
-                <div className="flex justify-between items-center">
-                    <span className="font-semibold text-slate-200 group-hover:text-white">Select a day</span>
-                    <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
-                </div>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-slate-200 group-hover:text-white">Select a day</span>
+                <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
+              </div>
             </button>
-             <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group">
-                <div className="flex justify-between items-center">
-                    <span className="font-semibold text-slate-200 group-hover:text-white">Yesterday</span>
-                    <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
-                </div>
+            <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-slate-200 group-hover:text-white">Yesterday</span>
+                <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
+              </div>
             </button>
-        </motion.div>
-      </main>
+          </motion.div>
+        </main>
       </div>
       <BottomNav />
-      <CustomizeDashboardModal 
-        isOpen={isCustomizeOpen} 
-        onClose={() => setIsCustomizeOpen(false)} 
-        widgets={widgets} 
-        onSave={setWidgets} 
+      <CustomizeDashboardModal
+        isOpen={isCustomizeOpen}
+        onClose={() => setIsCustomizeOpen(false)}
+        widgets={widgets}
+        onSave={setWidgets}
       />
     </div>
   );

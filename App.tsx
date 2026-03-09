@@ -13,6 +13,8 @@ import SettingsScreen from './screens/SettingsScreen';
 import LoginScreen from './screens/LoginScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import PrivacySecurityScreen from './screens/PrivacySecurityScreen';
+import DailyMedicationsScreen from './screens/DailyMedicationsScreen';
+import AddMedicationScreen from './screens/AddMedicationScreen';
 import { AppContextProvider } from './contexts/AppContext';
 
 const App: React.FC = () => {
@@ -35,6 +37,8 @@ const App: React.FC = () => {
               <Route path="/daily-meals" element={<DailyMealsScreen />} />
               <Route path="/add-meal" element={<AddMealScreen />} />
               <Route path="/meal/:foodId" element={<MealDetailScreen />} />
+              <Route path="/medications" element={<DailyMedicationsScreen />} />
+              <Route path="/add-medication" element={<AddMedicationScreen />} />
               <Route path="/devices" element={<DevicesScreen />} />
               <Route path="/connect-device/:deviceId" element={<ConnectDeviceScreen />} />
               <Route path="/settings" element={<SettingsScreen />} />
