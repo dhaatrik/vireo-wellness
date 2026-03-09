@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, User, Phone, ChevronDown } from 'lucide-react';
 import { useAppContext } from '../contexts/AppContext';
+import { formatPhoneNumber } from '../utils/validation';
 
 const COUNTRIES = [
   { code: 'US', isd: '+1', name: 'United States' },
@@ -23,10 +24,8 @@ const LoginScreen: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-    if (value.length <= 10) {
-      setPhone(value);
-    }
+    const formattedValue = formatPhoneNumber(e.target.value);
+    setPhone(formattedValue);
   };
 
   const handleLogin = (e: React.FormEvent) => {

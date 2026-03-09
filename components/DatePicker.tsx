@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { format, isSameDay, addDays, subDays } from 'date-fns';
+import { format, isSameDay, addDays } from 'date-fns';
 import { motion } from 'motion/react';
 
 interface DatePickerProps {
@@ -39,6 +39,8 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
     }
   };
 
+  const today = new Date();
+
   return (
     <div className="flex items-center justify-center py-4 px-2 bg-slate-900 border-b border-slate-800/50 transition-colors duration-300">
       <button onClick={() => handleScroll('left')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full">
@@ -53,7 +55,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
           const dayName = format(date, 'EEE');
           const dayNumber = format(date, 'd');
           const isSelected = isSameDay(date, selectedDate);
-          const isToday = isSameDay(date, new Date());
+          const isToday = isSameDay(date, today);
 
           return (
             <button
