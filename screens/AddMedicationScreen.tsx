@@ -47,7 +47,16 @@ const AddMedicationScreen: React.FC = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.05 }}
                                 onClick={() => handleLogMedication(med)}
-                                className="bg-slate-900 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-slate-800 p-4 rounded-2xl flex items-center justify-between cursor-pointer transition-all group"
+                                role="button"
+                                tabIndex={0}
+                                aria-label={`Log ${med.name}, ${med.dosage} ${med.form}`}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault();
+                                        handleLogMedication(med);
+                                    }
+                                }}
+                                className="bg-slate-900 border border-slate-800/80 hover:border-cyan-500/50 hover:bg-slate-800 p-4 rounded-2xl flex items-center justify-between cursor-pointer transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:border-transparent"
                             >
                                 <div className="flex flex-col flex-1 mr-4">
                                     <span className="text-white font-semibold flex items-center">
