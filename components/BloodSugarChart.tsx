@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { BloodSugarReading } from '../types';
 
@@ -10,12 +10,16 @@ interface BloodSugarChartProps {
 const timeFormatter = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit' });
 
 const BloodSugarChart: React.FC<BloodSugarChartProps> = ({ data }) => {
-  const formattedData = data.map(reading => ({
-    ...reading,
-    time: timeFormatter.format(new Date(reading.timestamp)),
-    beforeMeal: reading.type === 'before_meal' ? reading.value : null,
-    afterMeal: reading.type === 'after_meal' ? reading.value : null,
-  }));
+  // ⚡ Bolt: Memoize formatted data to prevent recalculation on every render
+  // This avoids expensive date parsing and formatting when data hasn't changed.
+  const formattedData = useMemo(() => {
+    return data.map(reading => ({
+      ...reading,
+      time: timeFormatter.format(new Date(reading.timestamp)),
+      beforeMeal: reading.type === 'before_meal' ? reading.value : null,
+      afterMeal: reading.type === 'after_meal' ? reading.value : null,
+    }));
+  }, [data]);
 
   return (
     <div className="w-full">
