@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { isSameDay } from 'date-fns';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import BloodSugarChart from '../components/BloodSugarChart';
@@ -89,7 +88,16 @@ const DashboardScreen: React.FC = () => {
   const eatenPercentage = (stats.eatenGL / stats.totalGL) * 100;
 
   const today = new Date();
-  const pillsTakenToday = medicationEntries.filter(e => isSameDay(new Date(e.takenAt), today)).length;
+  // ⚡ Bolt: Cache year, month, and date for manual integer comparison inside the filter loop to improve performance over date-fns isSameDay
+  const currentYear = today.getFullYear();
+  const currentMonth = today.getMonth();
+  const currentDay = today.getDate();
+  const pillsTakenToday = medicationEntries.filter(e => {
+    const entryDate = new Date(e.takenAt);
+    return entryDate.getFullYear() === currentYear &&
+           entryDate.getMonth() === currentMonth &&
+           entryDate.getDate() === currentDay;
+  }).length;
 
   const handleWaterAdd = () => setWaterIntake(waterIntake + 1);
   const handleWaterRemove = () => setWaterIntake(Math.max(0, waterIntake - 1));
