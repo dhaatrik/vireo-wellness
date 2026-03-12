@@ -58,7 +58,7 @@ const CustomizeDashboardModal: React.FC<CustomizeDashboardModalProps> = ({ isOpe
           >
             <div className="flex justify-between items-center mb-6 shrink-0">
               <h2 className="text-xl font-semibold text-white">Customize Dashboard</h2>
-              <button onClick={onClose} className="p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors">
+              <button onClick={onClose} className="p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors" aria-label="Close modal">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -72,6 +72,7 @@ const CustomizeDashboardModal: React.FC<CustomizeDashboardModalProps> = ({ isOpe
                         onClick={() => moveWidget(index, -1)} 
                         disabled={index === 0}
                         className="text-slate-500 hover:text-emerald-400 disabled:opacity-30 disabled:hover:text-slate-500"
+                        aria-label="Move widget up"
                       >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
                       </button>
@@ -79,6 +80,7 @@ const CustomizeDashboardModal: React.FC<CustomizeDashboardModalProps> = ({ isOpe
                         onClick={() => moveWidget(index, 1)} 
                         disabled={index === localWidgets.length - 1}
                         className="text-slate-500 hover:text-emerald-400 disabled:opacity-30 disabled:hover:text-slate-500"
+                        aria-label="Move widget down"
                       >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                       </button>
@@ -88,6 +90,7 @@ const CustomizeDashboardModal: React.FC<CustomizeDashboardModalProps> = ({ isOpe
                   <button 
                     onClick={() => toggleVisibility(index)}
                     className={`p-2 rounded-xl transition-colors ${widget.visible ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-400'}`}
+                    aria-label={widget.visible ? "Hide widget" : "Show widget"}
                   >
                     {widget.visible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
                   </button>

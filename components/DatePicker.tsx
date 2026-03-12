@@ -43,7 +43,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
 
   return (
     <div className="flex items-center justify-center py-4 px-2 bg-slate-900 border-b border-slate-800/50 transition-colors duration-300">
-      <button onClick={() => handleScroll('left')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full">
+      <button onClick={() => handleScroll('left')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full" aria-label="Previous date">
         <ChevronLeft className="w-5 h-5" />
       </button>
       <div 
@@ -81,7 +81,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
           );
         })}
       </div>
-       <button onClick={() => handleScroll('right')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full">
+       <button onClick={() => handleScroll('right')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full" aria-label="Next date">
         <ChevronRight className="w-5 h-5" />
       </button>
     </div>

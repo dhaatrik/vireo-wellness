@@ -39,7 +39,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-semibold text-white">Quick Add</h2>
-              <button onClick={onClose} className="p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors">
+              <button onClick={onClose} className="p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors" aria-label="Close Quick Add">
                 <X className="w-5 h-5" />
               </button>
             </div>

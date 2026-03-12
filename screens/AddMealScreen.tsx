@@ -38,7 +38,8 @@ const FoodListItem: React.FC<FoodListItemProps> = ({ item, onToggleSelect, onVie
       </div>
       <button 
         onClick={() => onToggleSelect(item.id)} 
-        className="ml-4 p-3 rounded-full hover:bg-slate-700/50 transition-colors"
+        className="ml-4 p-3 rounded-full hover:bg-slate-700/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+        aria-label={item.isSelected ? `Deselect ${item.name}` : `Select ${item.name}`}
       >
         {item.isSelected ? (
           <CheckCircle2 className="w-7 h-7 text-emerald-500 fill-emerald-500/20" />
@@ -129,7 +130,10 @@ const AddMealScreen: React.FC = () => {
             className="w-full bg-slate-900 border border-slate-800 text-white placeholder-slate-500 p-4 pl-12 rounded-2xl focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 focus:outline-none transition-all duration-300"
           />
           <Search className="w-5 h-5 text-slate-500 absolute left-4 top-1/2 transform -translate-y-1/2 group-focus-within:text-emerald-500 transition-colors" />
-          <button className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1.5 text-slate-400 hover:text-white bg-slate-800 rounded-lg transition-colors">
+          <button
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1.5 text-slate-400 hover:text-white bg-slate-800 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+            aria-label="Filter search results"
+          >
             <SlidersHorizontal className="w-4 h-4" />
           </button>
         </div>

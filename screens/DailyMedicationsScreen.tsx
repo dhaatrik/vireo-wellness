@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { isSameDay } from 'date-fns';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import DatePicker from '../components/DatePicker';
@@ -15,9 +14,16 @@ const DailyMedicationsScreen: React.FC = () => {
     const { medicationEntries } = useAppContext();
     const [selectedDate, setSelectedDate] = useState(new Date());
 
-    const entriesForSelectedDate = medicationEntries.filter(entry =>
-        isSameDay(new Date(entry.takenAt), selectedDate)
-    );
+    // ⚡ Bolt: Cache year, month, and date for manual integer comparison inside the filter loop to improve performance over date-fns isSameDay
+    const selectedYear = selectedDate.getFullYear();
+    const selectedMonth = selectedDate.getMonth();
+    const selectedDay = selectedDate.getDate();
+    const entriesForSelectedDate = medicationEntries.filter(entry => {
+        const entryDate = new Date(entry.takenAt);
+        return entryDate.getFullYear() === selectedYear &&
+               entryDate.getMonth() === selectedMonth &&
+               entryDate.getDate() === selectedDay;
+    });
 
     const pillsTakenToday = entriesForSelectedDate.length;
 
