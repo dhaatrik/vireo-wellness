@@ -30,6 +30,7 @@ const AddMedicationScreen: React.FC = () => {
                         type="text"
                         placeholder="Search medications..."
                         value={searchQuery}
+                        maxLength={50}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="w-full bg-slate-900 border border-slate-800 text-white text-sm rounded-2xl pl-12 pr-4 py-4 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
                     />

@@ -124,6 +124,7 @@ const AddMealScreen: React.FC = () => {
             type="text"
             placeholder="Search food..."
             value={searchTerm}
+            maxLength={50}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-slate-900 border border-slate-800 text-white placeholder-slate-500 p-4 pl-12 rounded-2xl focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 focus:outline-none transition-all duration-300"
           />

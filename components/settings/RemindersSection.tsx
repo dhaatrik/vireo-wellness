@@ -104,6 +104,7 @@ const RemindersSection: React.FC = () => {
                 type="text"
                 placeholder="Reminder message..."
                 value={newReminder.message}
+                maxLength={100}
                 onChange={e => setNewReminder({ ...newReminder, message: e.target.value })}
                 className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500"
                 autoFocus
