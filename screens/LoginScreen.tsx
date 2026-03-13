@@ -111,6 +111,7 @@ const LoginScreen: React.FC = () => {
                   type="tel"
                   id="phone"
                   value={phone}
+                  maxLength={10}
                   onChange={handlePhoneChange}
                   className="w-full bg-slate-900 border border-slate-800 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all"
                   placeholder="0000000000"

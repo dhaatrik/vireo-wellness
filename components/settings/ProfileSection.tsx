@@ -160,6 +160,7 @@ const ProfileSection: React.FC = () => {
                 <input
                   type="tel"
                   value={profileData.phone}
+                  maxLength={10}
                   onChange={handlePhoneChange}
                   className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-emerald-500"
                   placeholder="0000000000"
