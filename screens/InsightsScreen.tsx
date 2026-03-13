@@ -25,16 +25,18 @@ const InsightsScreen: React.FC = () => {
         <main className="flex-1 overflow-y-auto p-5 space-y-6 pb-24 md:pb-5">
           
           {/* Timeframe Toggle */}
-          <div className="flex bg-slate-900 rounded-2xl p-1 border border-slate-800">
+          <div className="flex bg-slate-900 rounded-2xl p-1 border border-slate-800" role="group" aria-label="Timeframe selection">
             <button
               onClick={() => setTimeframe('weekly')}
-              className={`flex-1 py-2 text-sm font-medium rounded-xl transition-all ${timeframe === 'weekly' ? 'bg-emerald-500 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
+              aria-pressed={timeframe === 'weekly'}
+              className={`flex-1 py-2 text-sm font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${timeframe === 'weekly' ? 'bg-emerald-500 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
             >
               Weekly
             </button>
             <button
               onClick={() => setTimeframe('monthly')}
-              className={`flex-1 py-2 text-sm font-medium rounded-xl transition-all ${timeframe === 'monthly' ? 'bg-emerald-500 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
+              aria-pressed={timeframe === 'monthly'}
+              className={`flex-1 py-2 text-sm font-medium rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${timeframe === 'monthly' ? 'bg-emerald-500 text-white shadow-md' : 'text-slate-400 hover:text-slate-200'}`}
             >
               Monthly
             </button>
