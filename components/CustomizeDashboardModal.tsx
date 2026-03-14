@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Eye, EyeOff } from 'lucide-react';
 
@@ -15,7 +15,7 @@ interface CustomizeDashboardModalProps {
   onSave: (newWidgets: WidgetConfig[]) => void;
 }
 
-const CustomizeDashboardModal: React.FC<CustomizeDashboardModalProps> = ({ isOpen, onClose, widgets, onSave }) => {
+const CustomizeDashboardModal = ({ isOpen, onClose, widgets, onSave }: CustomizeDashboardModalProps) => {
   const [localWidgets, setLocalWidgets] = useState<WidgetConfig[]>(widgets);
 
   // Simple move up/down for reordering without a complex dnd library

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState, ElementType } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Home, ClipboardList, Plus, TabletSmartphone, Settings, LineChart } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -7,11 +7,11 @@ import QuickAddModal from './QuickAddModal';
 
 interface NavItemProps {
   to: string;
-  icon: React.ElementType;
+  icon: ElementType;
   label: string;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ to, icon: Icon, label }) => {
+const NavItem = ({ to, icon: Icon, label }: NavItemProps) => {
   const location = useLocation();
   const isActive = location.pathname === to || (to === "/dashboard" && location.pathname === "/");
 
@@ -35,7 +35,7 @@ const NavItem: React.FC<NavItemProps> = ({ to, icon: Icon, label }) => {
   );
 };
 
-const BottomNav: React.FC = () => {
+const BottomNav = () => {
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
 
   return (

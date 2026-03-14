@@ -1,5 +1,3 @@
-## 2025-05-15 - Nested Reduce Optimization in DailyMealsScreen
-
-**Learning:** Nested `reduce` calls on hierarchical data (groups -> entries) can lead to O(N*M) callback overhead and redundant passes. Combining these into a single `for...of` loop inside `useMemo` significantly reduces CPU time and prevents re-calculation on unrelated state changes.
-
-**Action:** Prefer single-pass loops within `useMemo` for calculating multiple derived statistics from nested data structures in React components.
+## 2024-05-24 - Optimizing Date Generation and Comparisons in Loops
+**Learning:** `date-fns` functions like `addDays` and `isSameDay` introduce significant overhead when called repeatedly inside frequent component renders or loops (like `.map`). This is due to internal cloning and full date logic calculations.
+**Action:** When generating sequential dates, extract the year, month, and date integers once and use native math `new Date(year, month, date + i)` instead of `addDays`. When comparing dates inside a loop, extract the target year, month, and date integers *outside* the loop and perform direct manual integer comparisons (`===`) *inside* the loop instead of `isSameDay`.

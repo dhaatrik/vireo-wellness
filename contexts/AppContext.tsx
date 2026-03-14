@@ -1,5 +1,5 @@
 
-import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
+import React, { createContext, useState, useContext, useCallback } from 'react';
 import { FoodItem, Device, DailyMealGroup, MealEntry, MealType, User, Medication, MedicationEntry, Reminder } from '../types';
 import { MOCK_FOOD_ITEMS, MOCK_DEVICES, MOCK_DAILY_MEALS_TODAY, MOCK_USER, MOCK_MEDICATIONS, MOCK_MEDICATION_ENTRIES, MOCK_REMINDERS, MOCK_DASHBOARD_STATS } from '../constants';
 
@@ -27,7 +27,7 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const AppContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [userProfile, setUserProfile] = useState<User>(MOCK_USER);
   const [userMeals, setUserMeals] = useState<DailyMealGroup[]>(MOCK_DAILY_MEALS_TODAY);
   const [devices, setDevices] = useState<Device[]>(MOCK_DEVICES);

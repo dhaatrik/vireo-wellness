@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useMemo, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { format, isSameDay, addDays } from 'date-fns';
+import { format } from 'date-fns';
 import { motion } from 'motion/react';
 
 interface DatePickerProps {
@@ -10,17 +10,21 @@ interface DatePickerProps {
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) => {
-  const [currentMonthDates, setCurrentMonthDates] = useState<Date[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // ⚡ Bolt: Optimized date generation using useMemo and manual integer math to avoid addDays and unnecessary state updates
+  const currentMonthDates = useMemo(() => {
     const today = new Date();
     const datesArray: Date[] = [];
     const centerDate = selectedDate || today;
+    const year = centerDate.getFullYear();
+    const month = centerDate.getMonth();
+    const date = centerDate.getDate();
+
     for (let i = -10; i <= 10; i++) { 
-      datesArray.push(addDays(centerDate, i));
+      datesArray.push(new Date(year, month, date + i));
     }
-    setCurrentMonthDates(datesArray);
+    return datesArray;
   }, [selectedDate]);
 
   useEffect(() => {
@@ -41,6 +45,15 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
 
   const today = new Date();
 
+  // ⚡ Bolt: Extracted date components outside the render loop for faster comparison
+  const selY = selectedDate?.getFullYear();
+  const selM = selectedDate?.getMonth();
+  const selD = selectedDate?.getDate();
+
+  const todY = today.getFullYear();
+  const todM = today.getMonth();
+  const todD = today.getDate();
+
   return (
     <div className="flex items-center justify-center py-4 px-2 bg-slate-900 border-b border-slate-800/50 transition-colors duration-300">
       <button onClick={() => handleScroll('left')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" aria-label="Previous date">
@@ -55,8 +68,14 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
           const dayName = format(date, 'EEE');
           const dayNumber = format(date, 'd');
           const fullDateStr = format(date, 'EEEE, MMMM do, yyyy');
-          const isSelected = isSameDay(date, selectedDate);
-          const isToday = isSameDay(date, today);
+
+          // ⚡ Bolt: Manual integer comparison is significantly faster than date-fns isSameDay inside a loop
+          const dY = date.getFullYear();
+          const dM = date.getMonth();
+          const dD = date.getDate();
+
+          const isSelected = dY === selY && dM === selM && dD === selD;
+          const isToday = dY === todY && dM === todM && dD === todD;
 
           return (
             <button

@@ -2,7 +2,6 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { isSameDay } from 'date-fns';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import DatePicker from '../components/DatePicker';
@@ -99,7 +98,18 @@ const DailyMealsScreen: React.FC = () => {
     navigate('/add-meal', { state: { targetMealType: mealType, selectedDate: selectedDate.toISOString() } });
   };
 
-  const mealsForSelectedDate = isSameDay(selectedDate, new Date()) ? userMeals : [];
+  // ⚡ Bolt: Replaced isSameDay and new Date() instantiation with memoized manual integer comparisons to avoid expensive calculations on every render.
+  const mealsForSelectedDate = useMemo(() => {
+    const today = new Date();
+    if (
+      selectedDate.getFullYear() === today.getFullYear() &&
+      selectedDate.getMonth() === today.getMonth() &&
+      selectedDate.getDate() === today.getDate()
+    ) {
+      return userMeals;
+    }
+    return [];
+  }, [selectedDate, userMeals]);
 
   return (
     <div className="flex flex-col md:flex-row h-full bg-slate-950 flex-1 w-full overflow-hidden">

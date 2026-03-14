@@ -59,30 +59,39 @@ const DashboardScreen: React.FC = () => {
   const bloodSugarData = MOCK_BLOOD_SUGAR_READINGS;
 
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
-  const [widgets, setWidgets] = useState<WidgetConfig[]>(() => {
+  // ⚡ Bolt: Defer synchronous localStorage read to useEffect to avoid blocking initial render
+  const [widgets, setWidgets] = useState<WidgetConfig[]>(DEFAULT_WIDGETS);
+
+  useEffect(() => {
     const saved = localStorage.getItem('dashboardWidgets');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) {
-          return parsed;
+          setWidgets(parsed);
         }
       } catch (e) {
         console.error('Failed to parse dashboard widgets from local storage:', e);
       }
     }
-    return DEFAULT_WIDGETS;
-  });
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem('dashboardWidgets', JSON.stringify(widgets));
+    // Only save if it's different from initial or after loading
+    if (widgets !== DEFAULT_WIDGETS) {
+      localStorage.setItem('dashboardWidgets', JSON.stringify(widgets));
+    }
   }, [widgets]);
 
   const widgetMap = useMemo(() => {
-    return widgets.reduce((acc, widget) => {
+    // ⚡ Bolt: Replaced inefficient .reduce() with a faster for loop
+    const acc: Record<string, WidgetConfig> = {};
+    const len = widgets.length;
+    for (let i = 0; i < len; i++) {
+      const widget = widgets[i];
       acc[widget.id] = widget;
-      return acc;
-    }, {} as Record<string, WidgetConfig>);
+    }
+    return acc;
   }, [widgets]);
 
   const eatenPercentage = (stats.eatenGL / stats.totalGL) * 100;
