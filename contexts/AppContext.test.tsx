@@ -37,3 +37,11 @@ describe('AppContext - setWaterIntake', () => {
     expect(result.current.waterIntake).toBe(0);
   });
 });
+
+describe('useAppContext', () => {
+  it('should throw an error when used outside of an AppContextProvider', () => {
+    expect(() => renderHook(() => useAppContext())).toThrow(
+      'useAppContext must be used within an AppContextProvider'
+    );
+  });
+});
