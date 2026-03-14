@@ -2,12 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { LogOut } from 'lucide-react';
+import { useAppContext } from '../../contexts/AppContext';
 
 const SignOutSection: React.FC = () => {
   const navigate = useNavigate();
+  const { updateUserProfile } = useAppContext();
 
   const handleSignOut = () => {
-    // In a real app, clear auth tokens/state here
+    updateUserProfile({ name: '', email: '', phone: '', countryCode: 'IN' });
     navigate('/');
   };
 

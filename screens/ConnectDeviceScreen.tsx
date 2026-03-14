@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Header from '../components/Header';
@@ -15,7 +15,7 @@ const getDeviceIcon = (name: string) => {
   return <Activity className="w-12 h-12" />;
 };
 
-const ConnectDeviceScreen: React.FC = () => {
+const ConnectDeviceScreen = () => {
   const { deviceId } = useParams<{ deviceId: string }>();
   const navigate = useNavigate();
   const { getDeviceById, connectDevice } = useAppContext();
