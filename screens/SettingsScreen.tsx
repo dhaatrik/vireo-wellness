@@ -9,6 +9,7 @@ import ExportSection from '../components/settings/ExportSection';
 import SignOutSection from '../components/settings/SignOutSection';
 
 const SettingsScreen: React.FC = () => {
+
   return (
     <div className="flex flex-col md:flex-row h-full bg-slate-950 flex-1 w-full overflow-hidden">
       <div className="flex flex-col flex-1 w-full overflow-hidden order-1 md:order-2">
@@ -19,7 +20,6 @@ const SettingsScreen: React.FC = () => {
           <UnitsSection />
           <RemindersSection />
           <ExportSection />
-
           <SignOutSection />
 
         </main>

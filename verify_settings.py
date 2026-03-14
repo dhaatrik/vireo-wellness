@@ -6,8 +6,8 @@ async def run():
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
 
-        print("Navigating to http://localhost:3001")
-        await page.goto("http://localhost:3001")
+        print("Navigating to http://localhost:3000")
+        await page.goto("http://localhost:3000")
 
         # Wait for the initial redirect to take effect
         await page.wait_for_timeout(2000)
