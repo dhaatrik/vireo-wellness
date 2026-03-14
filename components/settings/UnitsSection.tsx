@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Activity, Scale } from 'lucide-react';
 
-const UnitsSection: React.FC = () => {
+const UnitsSection = () => {
   // Placeholder state for unit preferences - in a real app, this would come from context or persistent storage.
   const [glucoseUnit, setGlucoseUnit] = useState<'mg/dL' | 'mmol/L'>('mg/dL');
   const [weightUnit, setWeightUnit] = useState<'lbs' | 'kg'>('lbs');

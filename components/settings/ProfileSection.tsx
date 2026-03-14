@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import { motion } from 'motion/react';
 import { User, Mail, Phone, Edit2, Check, ChevronDown } from 'lucide-react';
 import { useAppContext } from '../../contexts/AppContext';
@@ -14,7 +14,7 @@ const COUNTRIES = [
   { code: 'JP', isd: '+81', name: 'Japan' },
 ];
 
-const ProfileSection: React.FC = () => {
+const ProfileSection = () => {
   const { userProfile, updateUserProfile } = useAppContext();
 
   // Profile state
@@ -50,7 +50,7 @@ const ProfileSection: React.FC = () => {
     });
   };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, ''); // Remove non-digits
     if (value.length <= 10) {
       setProfileData({ ...profileData, phone: value });

@@ -79,10 +79,14 @@ const DashboardScreen: React.FC = () => {
   }, [widgets]);
 
   const widgetMap = useMemo(() => {
-    return widgets.reduce((acc, widget) => {
+    // ⚡ Bolt: Replaced inefficient .reduce() with a faster for loop
+    const acc: Record<string, WidgetConfig> = {};
+    const len = widgets.length;
+    for (let i = 0; i < len; i++) {
+      const widget = widgets[i];
       acc[widget.id] = widget;
-      return acc;
-    }, {} as Record<string, WidgetConfig>);
+    }
+    return acc;
   }, [widgets]);
 
   const eatenPercentage = (stats.eatenGL / stats.totalGL) * 100;

@@ -1,4 +1,5 @@
 const { performance } = require('perf_hooks');
+const crypto = require('crypto');
 
 // Generate mock data
 const generateMockData = (numGroups, entriesPerGroup) => {
@@ -7,7 +8,7 @@ const generateMockData = (numGroups, entriesPerGroup) => {
   for (let i = 0; i < numGroups; i++) {
     const group = { entries: [] };
     for (let j = 0; j < entriesPerGroup; j++) {
-      group.entries.push({ loggedAt: new Date(currentTime - Math.random() * 100000000).toISOString() });
+      group.entries.push({ loggedAt: new Date(currentTime - crypto.randomInt(0, 100000000)).toISOString() });
     }
     userMeals.push(group);
   }

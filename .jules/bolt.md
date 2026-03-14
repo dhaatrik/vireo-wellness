@@ -1,5 +1,5 @@
-## 2025-05-15 - Nested Reduce Optimization in DailyMealsScreen
+## 2024-05-24 - Object Accumulation Efficiency
 
-**Learning:** Nested `reduce` calls on hierarchical data (groups -> entries) can lead to O(N*M) callback overhead and redundant passes. Combining these into a single `for...of` loop inside `useMemo` significantly reduces CPU time and prevents re-calculation on unrelated state changes.
+**Learning:** When converting an array to a map (keyed object) in TypeScript, a standard `for` loop is significantly faster than using `.reduce()`. While `.reduce()` is often preferred for functional programming readability, its callback overhead causes noticeable performance delays in tight loops or frequent recalculations (like those triggered by `useMemo` in React). Using `Object.fromEntries` combined with `.map()` is even slower due to the allocation of intermediate tuple arrays.
 
-**Action:** Prefer single-pass loops within `useMemo` for calculating multiple derived statistics from nested data structures in React components.
+**Action:** Whenever a map/dictionary needs to be constructed from an array for quick lookups, specifically within performance-sensitive components, prioritize a standard `for` loop over `.reduce()`. It maintains the same functionality while avoiding callback overhead.

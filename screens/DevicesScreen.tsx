@@ -28,8 +28,6 @@ const DeviceListItem: React.FC<DeviceListItemProps> = ({ device, onConnect, inde
   const handleItemClick = () => {
     if (!device.isConnected) {
       navigate(`/connect-device/${device.id}`);
-    } else {
-      console.log("Device already connected:", device.name);
     }
   };
 
