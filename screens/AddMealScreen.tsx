@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import Header from '../components/Header';
@@ -15,7 +15,7 @@ interface FoodListItemProps {
   onViewDetails: (itemId: string) => void;
 }
 
-const FoodListItem: React.FC<FoodListItemProps> = ({ item, onToggleSelect, onViewDetails }) => {
+const FoodListItem = ({ item, onToggleSelect, onViewDetails }: FoodListItemProps) => {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
@@ -51,7 +51,7 @@ const FoodListItem: React.FC<FoodListItemProps> = ({ item, onToggleSelect, onVie
   );
 };
 
-const AddMealScreen: React.FC = () => {
+const AddMealScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { allFoodItems, addMealEntry } = useAppContext();
