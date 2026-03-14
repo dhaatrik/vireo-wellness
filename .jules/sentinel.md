@@ -7,3 +7,7 @@
 **Vulnerability:** The Vite development server was configured to bind to `0.0.0.0`, making it accessible from any device on the local network.
 **Learning:** In `vite.config.ts`, setting `host: '0.0.0.0'` exposes the development environment to potential unauthorized access by users on the same network.
 **Prevention:** In Vite configurations, always restrict the development server binding to `localhost` by omitting the `host` property or setting it explicitly to `localhost` to ensure the dev server is only accessible from the local machine.
+## 2024-05-24 - Replaced insecure Math.random() with crypto.randomInt() in benchmark script
+**Vulnerability:** The use of `Math.random()` to generate mock timestamps in `scripts/benchmarks/benchmark.cjs` is cryptographically insecure and predictable, creating a potential risk in scenarios demanding robust randomness.
+**Learning:** `Math.random()` should never be used where secure randomness is required. The `crypto` module built into Node provides secure alternatives like `crypto.randomInt()`.
+**Prevention:** Always default to using the `crypto` module (or `window.crypto` on the web) for tasks involving random number generation when security could be a concern, avoiding `Math.random()` completely for such use cases.

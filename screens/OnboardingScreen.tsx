@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, ArrowLeft, Target, Activity, Scale } from 'lucide-react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { DiabetesTypeStep } from '../components/onboarding/DiabetesTypeStep';
+import { TargetGlucoseStep } from '../components/onboarding/TargetGlucoseStep';
+import { WeightGoalStep } from '../components/onboarding/WeightGoalStep';
 
 const OnboardingScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -40,23 +43,10 @@ const OnboardingScreen: React.FC = () => {
               exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h1 className="text-3xl font-bold text-white mb-2">What is your diabetes type?</h1>
-              <p className="text-slate-400 mb-8">This helps us personalize your insights and recommendations.</p>
-              
-              <div className="space-y-3">
-                {['Type 1', 'Type 2', 'Gestational', 'Prediabetes', 'None (Just tracking)'].map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => setDiabetesType(type)}
-                    className={`w-full p-4 rounded-2xl border text-left transition-all ${diabetesType === type ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-700'}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Activity className={`w-5 h-5 ${diabetesType === type ? 'text-emerald-400' : 'text-slate-500'}`} />
-                      <span className="font-medium">{type}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
+              <DiabetesTypeStep
+                diabetesType={diabetesType}
+                setDiabetesType={setDiabetesType}
+              />
             </motion.div>
           )}
 
@@ -68,34 +58,10 @@ const OnboardingScreen: React.FC = () => {
               exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h1 className="text-3xl font-bold text-white mb-2">Target Glucose Range</h1>
-              <p className="text-slate-400 mb-8">Set your ideal fasting blood sugar range (mg/dL).</p>
-              
-              <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl">
-                <div className="flex justify-between items-center mb-6">
-                  <span className="text-slate-400 font-medium">Min</span>
-                  <span className="text-2xl font-bold text-emerald-400">{targetGlucose[0]}</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="60" max="100" 
-                  value={targetGlucose[0]} 
-                  onChange={(e) => setTargetGlucose([parseInt(e.target.value), targetGlucose[1]])}
-                  className="w-full accent-emerald-500 mb-8"
-                />
-
-                <div className="flex justify-between items-center mb-6">
-                  <span className="text-slate-400 font-medium">Max</span>
-                  <span className="text-2xl font-bold text-rose-400">{targetGlucose[1]}</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="100" max="200" 
-                  value={targetGlucose[1]} 
-                  onChange={(e) => setTargetGlucose([targetGlucose[0], parseInt(e.target.value)])}
-                  className="w-full accent-rose-500"
-                />
-              </div>
+              <TargetGlucoseStep
+                targetGlucose={targetGlucose}
+                setTargetGlucose={setTargetGlucose}
+              />
             </motion.div>
           )}
 
@@ -107,30 +73,10 @@ const OnboardingScreen: React.FC = () => {
               exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col"
             >
-              <h1 className="text-3xl font-bold text-white mb-2">What's your weight goal?</h1>
-              <p className="text-slate-400 mb-8">We'll adjust your daily calorie and GL targets accordingly.</p>
-              
-              <div className="space-y-3">
-                {[
-                  { id: 'lose', label: 'Lose Weight', desc: 'Caloric deficit' },
-                  { id: 'maintain', label: 'Maintain Weight', desc: 'Maintenance calories' },
-                  { id: 'gain', label: 'Gain Weight', desc: 'Caloric surplus' }
-                ].map((goal) => (
-                  <button
-                    key={goal.id}
-                    onClick={() => setWeightGoal(goal.id)}
-                    className={`w-full p-4 rounded-2xl border text-left transition-all ${weightGoal === goal.id ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-700'}`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Scale className={`w-5 h-5 ${weightGoal === goal.id ? 'text-emerald-400' : 'text-slate-500'}`} />
-                      <div>
-                        <div className="font-medium">{goal.label}</div>
-                        <div className={`text-xs mt-0.5 ${weightGoal === goal.id ? 'text-emerald-500/70' : 'text-slate-500'}`}>{goal.desc}</div>
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
+              <WeightGoalStep
+                weightGoal={weightGoal}
+                setWeightGoal={setWeightGoal}
+              />
             </motion.div>
           )}
         </AnimatePresence>
