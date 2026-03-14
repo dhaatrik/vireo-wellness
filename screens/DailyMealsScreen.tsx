@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { isSameDay } from 'date-fns';
@@ -78,14 +78,20 @@ const DailyMealsScreen: React.FC = () => {
   const { userMeals } = useAppContext();
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const totalCaloriesToday = userMeals.reduce((sum, group) => sum + group.totalCalories, 0);
-
-  const maxTimestampStr = userMeals.reduce((maxGroup, group) => {
-    const maxEntry = group.entries.reduce((max, entry) => {
-      return entry.loggedAt > max ? entry.loggedAt : max;
-    }, "");
-    return maxEntry > maxGroup ? maxEntry : maxGroup;
-  }, "");
+  const { totalCaloriesToday, maxTimestampStr } = useMemo(() => {
+    // ⚡ Bolt: Optimized nested reduce calls into a single pass and added memoization for improved performance.
+    let calories = 0;
+    let maxTS = "";
+    for (const group of userMeals) {
+      calories += group.totalCalories;
+      for (const entry of group.entries) {
+        if (entry.loggedAt > maxTS) {
+          maxTS = entry.loggedAt;
+        }
+      }
+    }
+    return { totalCaloriesToday: calories, maxTimestampStr: maxTS };
+  }, [userMeals]);
 
   const lastAddedTime = maxTimestampStr ? new Date(maxTimestampStr) : undefined;
 
