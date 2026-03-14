@@ -25,7 +25,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
 
   useEffect(() => {
     if (scrollContainerRef.current) {
-      const selectedEl = scrollContainerRef.current.querySelector('[data-selected="true"]'); 
+      const selectedEl = scrollContainerRef.current.querySelector('[aria-pressed="true"]');
       if (selectedEl) {
         selectedEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
@@ -43,7 +43,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
 
   return (
     <div className="flex items-center justify-center py-4 px-2 bg-slate-900 border-b border-slate-800/50 transition-colors duration-300">
-      <button onClick={() => handleScroll('left')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full" aria-label="Previous date">
+      <button onClick={() => handleScroll('left')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" aria-label="Previous date">
         <ChevronLeft className="w-5 h-5" />
       </button>
       <div 
@@ -54,6 +54,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
         {currentMonthDates.map((date, index) => {
           const dayName = format(date, 'EEE');
           const dayNumber = format(date, 'd');
+          const fullDateStr = format(date, 'EEEE, MMMM do, yyyy');
           const isSelected = isSameDay(date, selectedDate);
           const isToday = isSameDay(date, today);
 
@@ -61,8 +62,9 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
             <button
               key={index}
               onClick={() => onDateChange(date)}
-              data-selected={isSelected}
-              className={`relative flex flex-col items-center justify-center min-w-[3rem] h-16 rounded-2xl p-2 transition-all duration-300 ease-out snap-center
+              aria-pressed={isSelected}
+              aria-label={fullDateStr}
+              className={`relative flex flex-col items-center justify-center min-w-[3rem] h-16 rounded-2xl p-2 transition-all duration-300 ease-out snap-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500
                 ${isSelected ? 'text-white shadow-lg shadow-emerald-500/20 scale-110' : 'bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-slate-200'}
                 ${isToday && !isSelected ? 'border border-emerald-500/50' : 'border border-transparent'} 
               `}
@@ -81,7 +83,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ selectedDate, onDateChange }) =
           );
         })}
       </div>
-       <button onClick={() => handleScroll('right')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full" aria-label="Next date">
+       <button onClick={() => handleScroll('right')} className="p-2 text-slate-500 hover:text-white transition-colors bg-slate-800/30 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500" aria-label="Next date">
         <ChevronRight className="w-5 h-5" />
       </button>
     </div>

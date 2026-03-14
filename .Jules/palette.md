@@ -3,3 +3,7 @@
 ## 2024-05-15 - ARIA Labels on Icon-Only List Buttons
 **Learning:** Icon-only buttons within list items (like the 'Select/Deselect' circle in a food list or a filter icon next to a search bar) are completely invisible to screen readers without an `aria-label`. Furthermore, stateful toggle buttons must have dynamic ARIA labels (e.g., changing from "Select [Item Name]" to "Deselect [Item Name]") to provide context about the *action* that will occur, rather than just the current state.
 **Action:** Always add descriptive, dynamic `aria-label`s to icon-only interactive elements and ensure they have visible focus states (`focus-visible:ring-2`, etc.) for keyboard navigation.
+
+## 2025-02-28 - Screen Reader Accessibility for Date Scrollers
+**Learning:** Custom horizontal date pickers that display abbreviated dates (e.g., "Tue 12") provide a poor screen reader experience because the abbreviated text lacks context and the current selection state is often visually implied rather than semantically declared.
+**Action:** Always provide a fully formatted date string to the `aria-label` (e.g., "Tuesday, March 12th, 2024") and replace custom state indicators (like `data-selected`) with the semantic `aria-pressed` attribute to clearly communicate selection state to assistive technologies.
