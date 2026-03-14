@@ -63,19 +63,20 @@ const AddMealScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabName>("Meals");
   const [selectedItems, setSelectedItems] = useState<Record<string, SelectedFoodItem>>({});
   
-  const foodItemsWithSelection: SelectedFoodItem[] = useMemo(() => {
-    return allFoodItems.map(item => ({
+  // ⚡ Bolt: Memoize the filtered base list independently to avoid re-running expensive string matching on the entire dataset every time a user toggles an item selection.
+  const filteredFoodItems = useMemo(() => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return allFoodItems.filter(item =>
+      item.name.toLowerCase().includes(lowerSearchTerm)
+    );
+  }, [allFoodItems, searchTerm]);
+
+  const displayItems: SelectedFoodItem[] = useMemo(() => {
+    return filteredFoodItems.map(item => ({
       ...item,
       isSelected: !!selectedItems[item.id],
     }));
-  }, [allFoodItems, selectedItems]);
-
-  const filteredFoodItems = useMemo(() => {
-    const lowerSearchTerm = searchTerm.toLowerCase();
-    return foodItemsWithSelection.filter(item =>
-      item.name.toLowerCase().includes(lowerSearchTerm)
-    );
-  }, [foodItemsWithSelection, searchTerm]);
+  }, [filteredFoodItems, selectedItems]);
 
   const handleToggleSelect = (itemId: string) => {
     setSelectedItems(prev => {
@@ -160,8 +161,8 @@ const AddMealScreen: React.FC = () => {
       <main className="flex-1 overflow-y-auto p-5 pb-32">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           <AnimatePresence>
-            {filteredFoodItems.length > 0 ? (
-                filteredFoodItems.map(item => (
+            {displayItems.length > 0 ? (
+                displayItems.map(item => (
                   <FoodListItem 
                     key={item.id} 
                     item={item} 
