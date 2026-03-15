@@ -11,3 +11,7 @@
 **Vulnerability:** The use of `Math.random()` to generate mock timestamps in `scripts/benchmarks/benchmark.cjs` is cryptographically insecure and predictable, creating a potential risk in scenarios demanding robust randomness.
 **Learning:** `Math.random()` should never be used where secure randomness is required. The `crypto` module built into Node provides secure alternatives like `crypto.randomInt()`.
 **Prevention:** Always default to using the `crypto` module (or `window.crypto` on the web) for tasks involving random number generation when security could be a concern, avoiding `Math.random()` completely for such use cases.
+## 2024-05-25 - Avoid security theater with secure randoms in benchmark scripts
+**Vulnerability:** Replacing `Math.random()` with `crypto.randomInt()` in benchmark scripts was attempted, incorrectly perceived as addressing weak randomness.
+**Learning:** Benchmarks require fast synthetic data generation where unpredictability is completely irrelevant. Introducing cryptographically secure random number generators (CSPRNGs) like `crypto.randomInt()` slows down mock data creation, bloats execution time, and can skew performance metrics, creating active harm for zero security gain.
+**Prevention:** Never apply security fixes like CSPRNGs to benchmark or non-security-critical mock data logic. Focus on actual application code where unpredictability is a genuine security requirement.

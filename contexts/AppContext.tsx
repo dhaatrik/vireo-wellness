@@ -45,7 +45,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
   const addMealEntry = useCallback((mealType: MealType, foodItem: FoodItem, quantity: number) => {
     setUserMeals(prevMeals => {
       const newEntry: MealEntry = {
-        id: `me-${Date.now()}`,
+        id: `me-${crypto.randomUUID()}`,
         foodItem,
         quantity,
         loggedAt: new Date().toISOString(),
@@ -103,7 +103,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
     setMedicationEntries(prev => [
       ...prev,
       {
-        id: `mede-${Date.now()}`,
+        id: `mede-${crypto.randomUUID()}`,
         medication,
         takenAt: new Date().toISOString()
       }
@@ -113,7 +113,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
   const addReminder = useCallback((reminderData: Omit<Reminder, 'id'>) => {
     setReminders(prev => [
       ...prev,
-      { ...reminderData, id: `rem-${Date.now()}` }
+      { ...reminderData, id: `rem-${crypto.randomUUID()}` }
     ]);
   }, []);
 
