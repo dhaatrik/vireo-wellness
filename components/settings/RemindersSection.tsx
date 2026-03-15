@@ -46,12 +46,14 @@ const ReminderItem = ({ reminder, onToggle, onDelete }: ReminderItemProps) => (
       <button
         onClick={() => onDelete(reminder.id)}
         className="text-slate-500 hover:text-rose-400 transition-colors md:opacity-0 group-hover:opacity-100 p-2"
+        aria-label="Delete reminder"
       >
         <Trash2 className="w-4 h-4" />
       </button>
       <button
         onClick={() => onToggle(reminder.id)}
         className={`w-10 h-5 rounded-full transition-colors duration-300 relative ${reminder.isActive ? 'bg-emerald-500' : 'bg-slate-700'}`}
+        aria-label={reminder.isActive ? "Deactivate reminder" : "Activate reminder"}
       >
         <span className={`absolute top-0.5 left-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-300 ${reminder.isActive ? 'translate-x-5' : 'translate-x-0'}`} />
       </button>
@@ -148,6 +150,7 @@ const RemindersSection = () => {
           <button
             onClick={() => setNotifications(!notifications)}
             className={`w-12 h-6 rounded-full transition-colors duration-300 relative ${notifications ? 'bg-emerald-500' : 'bg-slate-700'}`}
+            aria-label={notifications ? "Disable push notifications" : "Enable push notifications"}
           >
             <span className={`absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 ${notifications ? 'translate-x-6' : 'translate-x-0'}`} />
           </button>
