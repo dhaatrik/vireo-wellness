@@ -175,10 +175,17 @@ const AddMealScreen = () => {
   }, [allFoodItems, searchTerm]);
 
   const displayItems: SelectedFoodItem[] = useMemo(() => {
-    return filteredFoodItems.map(item => ({
-      ...item,
-      isSelected: !!selectedItems[item.id],
-    }));
+    // ⚡ Bolt: Replaced .map() with a faster for loop to avoid callback overhead and improve rendering performance.
+    const result = new Array(filteredFoodItems.length);
+    const len = filteredFoodItems.length;
+    for (let i = 0; i < len; i++) {
+      const item = filteredFoodItems[i];
+      result[i] = {
+        ...item,
+        isSelected: !!selectedItems[item.id],
+      };
+    }
+    return result;
   }, [filteredFoodItems, selectedItems]);
 
   const handleToggleSelect = (itemId: string) => {
