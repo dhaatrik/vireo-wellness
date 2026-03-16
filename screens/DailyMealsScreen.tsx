@@ -60,7 +60,8 @@ const MealAccordion: React.FC<MealAccordionProps> = ({ mealGroup, onAddFood }) =
               )}
               <button
                 onClick={() => onAddFood(mealGroup.mealType)}
-                className="mt-4 w-full py-3 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-medium rounded-xl flex items-center justify-center transition-colors"
+                aria-label={`Add Food to ${mealGroup.mealType.replace('_', ' ').toLowerCase()}`}
+                className="mt-4 w-full py-3 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-medium rounded-xl flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
               >
                 <Plus className="w-4 h-4 mr-2" /> Add Food
               </button>
