@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Header from '../components/Header';
@@ -84,8 +84,21 @@ const DeviceListItem: React.FC<DeviceListItemProps> = ({ device, onConnect, inde
 const DevicesScreen: React.FC = () => {
   const { devices, connectDevice } = useAppContext();
 
-  const availableToConnect = devices.filter(d => !d.isConnected);
-  const connectedDevices = devices.filter(d => d.isConnected);
+  // ⚡ Bolt: Combine multiple .filter() calls into a single loop and memoize to avoid recalculations on every render.
+  const { availableToConnect, connectedDevices } = useMemo(() => {
+    const available: Device[] = [];
+    const connected: Device[] = [];
+    const len = devices.length;
+    for (let i = 0; i < len; i++) {
+      const d = devices[i];
+      if (d.isConnected) {
+        connected.push(d);
+      } else {
+        available.push(d);
+      }
+    }
+    return { availableToConnect: available, connectedDevices: connected };
+  }, [devices]);
 
   return (
     <div className="flex flex-col md:flex-row h-full bg-slate-950 flex-1 w-full overflow-hidden">
