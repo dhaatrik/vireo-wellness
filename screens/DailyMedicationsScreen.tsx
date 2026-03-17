@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import Header from '../components/Header';
@@ -15,15 +15,18 @@ const DailyMedicationsScreen: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     // ⚡ Bolt: Cache year, month, and date for manual integer comparison inside the filter loop to improve performance over date-fns isSameDay
-    const selectedYear = selectedDate.getFullYear();
-    const selectedMonth = selectedDate.getMonth();
-    const selectedDay = selectedDate.getDate();
-    const entriesForSelectedDate = medicationEntries.filter(entry => {
-        const entryDate = new Date(entry.takenAt);
-        return entryDate.getFullYear() === selectedYear &&
-               entryDate.getMonth() === selectedMonth &&
-               entryDate.getDate() === selectedDay;
-    });
+    // and wrap in useMemo to prevent unnecessary recalculations on every render.
+    const entriesForSelectedDate = useMemo(() => {
+        const selectedYear = selectedDate.getFullYear();
+        const selectedMonth = selectedDate.getMonth();
+        const selectedDay = selectedDate.getDate();
+        return medicationEntries.filter(entry => {
+            const entryDate = new Date(entry.takenAt);
+            return entryDate.getFullYear() === selectedYear &&
+                   entryDate.getMonth() === selectedMonth &&
+                   entryDate.getDate() === selectedDay;
+        });
+    }, [medicationEntries, selectedDate]);
 
     const pillsTakenToday = entriesForSelectedDate.length;
 
