@@ -166,13 +166,21 @@ const AddMealScreen = () => {
   const [activeTab, setActiveTab] = useState<TabName>("Meals");
   const [selectedItems, setSelectedItems] = useState<Record<string, SelectedFoodItem>>({});
   
+  // ⚡ Bolt: Pre-compute lower-case names to avoid expensive string transformations on every search keystroke.
+  const allFoodItemsWithLower = useMemo(() => {
+    return allFoodItems.map(item => ({
+      ...item,
+      lowerName: item.name.toLowerCase()
+    }));
+  }, [allFoodItems]);
+
   // ⚡ Bolt: Memoize the filtered base list independently to avoid re-running expensive string matching on the entire dataset every time a user toggles an item selection.
   const filteredFoodItems = useMemo(() => {
     const lowerSearchTerm = searchTerm.toLowerCase();
-    return allFoodItems.filter(item =>
-      item.name.toLowerCase().includes(lowerSearchTerm)
+    return allFoodItemsWithLower.filter(item =>
+      item.lowerName.includes(lowerSearchTerm)
     );
-  }, [allFoodItems, searchTerm]);
+  }, [allFoodItemsWithLower, searchTerm]);
 
   const displayItems: SelectedFoodItem[] = useMemo(() => {
     // ⚡ Bolt: Replaced .map() with a faster for loop to avoid callback overhead and improve rendering performance.
