@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Eye, EyeOff } from 'lucide-react';
-
-export interface WidgetConfig {
-  id: string;
-  title: string;
-  visible: boolean;
-}
+import { WidgetConfig } from '../types';
 
 interface CustomizeDashboardModalProps {
   isOpen: boolean;

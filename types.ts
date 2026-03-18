@@ -91,3 +91,9 @@ export interface User {
 export interface SelectedFoodItem extends FoodItem {
   isSelected: boolean;
 }
+
+export interface WidgetConfig {
+  id: string;
+  title: string;
+  visible: boolean;
+}
