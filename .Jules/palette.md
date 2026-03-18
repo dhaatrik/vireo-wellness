@@ -7,3 +7,7 @@
 ## 2025-02-28 - Screen Reader Accessibility for Date Scrollers
 **Learning:** Custom horizontal date pickers that display abbreviated dates (e.g., "Tue 12") provide a poor screen reader experience because the abbreviated text lacks context and the current selection state is often visually implied rather than semantically declared.
 **Action:** Always provide a fully formatted date string to the `aria-label` (e.g., "Tuesday, March 12th, 2024") and replace custom state indicators (like `data-selected`) with the semantic `aria-pressed` attribute to clearly communicate selection state to assistive technologies.
+
+## 2025-03-05 - Missing Interactive States and Screen Reader Context in Modals
+**Learning:** Custom interactive elements like list reordering arrows and visibility toggle icons in modals often rely heavily on static visual proximity (e.g., an icon next to a title) for meaning, making them confusing for screen readers if generic labels like "Hide widget" are used. Additionally, lacking `focus-visible` styling renders these elements invisible to keyboard users when navigated.
+**Action:** Always verify that icon-only buttons in mapped list elements have dynamic `aria-label`s describing the exact target (e.g., "Hide [Item Name]") and include explicit `focus-visible` styles (e.g., `focus-visible:ring-2`) to ensure full keyboard navigation support.

@@ -66,16 +66,16 @@ const CustomizeDashboardModal = ({ isOpen, onClose, widgets, onSave }: Customize
                       <button 
                         onClick={() => moveWidget(index, -1)} 
                         disabled={index === 0}
-                        className="text-slate-500 hover:text-emerald-400 disabled:opacity-30 disabled:hover:text-slate-500"
-                        aria-label="Move widget up"
+                        className="text-slate-500 hover:text-emerald-400 disabled:opacity-30 disabled:hover:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-md"
+                        aria-label={`Move ${widget.title} up`}
                       >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
                       </button>
                       <button 
                         onClick={() => moveWidget(index, 1)} 
                         disabled={index === localWidgets.length - 1}
-                        className="text-slate-500 hover:text-emerald-400 disabled:opacity-30 disabled:hover:text-slate-500"
-                        aria-label="Move widget down"
+                        className="text-slate-500 hover:text-emerald-400 disabled:opacity-30 disabled:hover:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-md"
+                        aria-label={`Move ${widget.title} down`}
                       >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                       </button>
@@ -84,8 +84,8 @@ const CustomizeDashboardModal = ({ isOpen, onClose, widgets, onSave }: Customize
                   </div>
                   <button 
                     onClick={() => toggleVisibility(index)}
-                    className={`p-2 rounded-xl transition-colors ${widget.visible ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-400'}`}
-                    aria-label={widget.visible ? "Hide widget" : "Show widget"}
+                    className={`p-2 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${widget.visible ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-400'}`}
+                    aria-label={widget.visible ? `Hide ${widget.title}` : `Show ${widget.title}`}
                   >
                     {widget.visible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
                   </button>
