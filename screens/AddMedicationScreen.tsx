@@ -11,13 +11,21 @@ const AddMedicationScreen = () => {
     const { allMedications, logMedication } = useAppContext();
     const [searchQuery, setSearchQuery] = useState('');
 
+    // ⚡ Bolt: Pre-compute lower-case names to avoid expensive string transformations on every search keystroke
+    const allMedicationsWithLower = useMemo(() => {
+        return allMedications.map(med => ({
+            ...med,
+            lowerName: med.name.toLowerCase()
+        }));
+    }, [allMedications]);
+
     // ⚡ Bolt: Wrap filtering in useMemo and hoist toLowerCase to prevent unnecessary recalculations on every render
     const filteredMedications = useMemo(() => {
         const lowerSearchQuery = searchQuery.toLowerCase();
-        return allMedications.filter(med =>
-            med.name.toLowerCase().includes(lowerSearchQuery)
+        return allMedicationsWithLower.filter(med =>
+            med.lowerName.includes(lowerSearchQuery)
         );
-    }, [allMedications, searchQuery]);
+    }, [allMedicationsWithLower, searchQuery]);
 
     const handleLogMedication = (medication: Medication) => {
         logMedication(medication);
