@@ -15,3 +15,8 @@
 **Vulnerability:** Replacing `Math.random()` with `crypto.randomInt()` in benchmark scripts was attempted, incorrectly perceived as addressing weak randomness.
 **Learning:** Benchmarks require fast synthetic data generation where unpredictability is completely irrelevant. Introducing cryptographically secure random number generators (CSPRNGs) like `crypto.randomInt()` slows down mock data creation, bloats execution time, and can skew performance metrics, creating active harm for zero security gain.
 **Prevention:** Never apply security fixes like CSPRNGs to benchmark or non-security-critical mock data logic. Focus on actual application code where unpredictability is a genuine security requirement.
+
+## 2026-03-17 - Unsafe JSON Parsing from Local Storage
+**Vulnerability:** Parsing raw JSON from LocalStorage without verifying its schema in `DashboardScreen.tsx` could lead to application crashes or unexpected behavior if the stored data was malformed or maliciously altered.
+**Learning:** Data from `localStorage` is untrusted and can be modified by users or other scripts (if there are other vulnerabilities like XSS). Always validate the schema of the parsed data before using it to update the application state.
+**Prevention:** Implement type guards or use schema validation libraries (like Zod) to verify that data retrieved from `localStorage` matches the expected interface immediately after `JSON.parse`.

@@ -5,12 +5,14 @@ import { motion } from 'motion/react';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import BloodSugarChart from '../components/BloodSugarChart';
-import CustomizeDashboardModal, { WidgetConfig } from '../components/CustomizeDashboardModal';
+import CustomizeDashboardModal from '../components/CustomizeDashboardModal';
 import StatCard from '../components/StatCard';
 import { EatenWidget, WaterWidget, ChartWidget } from '../components/widgets';
 import { MOCK_DASHBOARD_STATS, MOCK_BLOOD_SUGAR_READINGS } from '../constants';
 import { Bell, Droplet, Pill, Footprints, Flame, ChevronRight, Settings2, Flame as FlameIcon, Plus, Minus } from 'lucide-react';
 import { useAppContext } from '../contexts/AppContext';
+import { WidgetConfig } from '../types';
+import { isValidWidgetConfigArray } from '../utils/validators';
 
 const DEFAULT_WIDGETS: WidgetConfig[] = [
   { id: 'eaten', title: 'Eaten Summary', visible: true },
@@ -37,8 +39,10 @@ const DashboardScreen: React.FC = () => {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
+        if (isValidWidgetConfigArray(parsed)) {
           setWidgets(parsed);
+        } else {
+          console.warn('Dashboard widgets in local storage did not match expected schema');
         }
       } catch (e) {
         console.error('Failed to parse dashboard widgets from local storage:', e);
