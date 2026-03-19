@@ -14,6 +14,7 @@ export const DiabetesTypeStep = ({ diabetesType, setDiabetesType }: DiabetesType
       <div className="space-y-3">
         {['Type 1', 'Type 2', 'Gestational', 'Prediabetes', 'None (Just tracking)'].map((type) => (
           <button
+            type="button"
             key={type}
             onClick={() => setDiabetesType(type)}
             className={`w-full p-4 rounded-2xl border text-left transition-all ${diabetesType === type ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : 'bg-slate-900 border-slate-800 text-slate-300 hover:border-slate-700'}`}

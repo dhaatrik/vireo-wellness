@@ -1,13 +1,4 @@
-## 2024-03-10 - Keyboard Navigation in Framer Motion Divs\n**Learning:** When using `motion.div` from framer-motion as interactive elements (e.g., clickable list items), they do not automatically receive keyboard focus or screen reader support. Adding `role="button"`, `tabIndex={0}`, an `aria-label`, and handling the `onKeyDown` event for `Enter` and `Space` keys is critical for a11y.\n**Action:** Always verify that interactive custom components or framer-motion elements acting as buttons have proper keyboard accessibility attributes and focus visible states.
+## 2024-03-19 - Explicit Button Types
 
-## 2024-05-15 - ARIA Labels on Icon-Only List Buttons
-**Learning:** Icon-only buttons within list items (like the 'Select/Deselect' circle in a food list or a filter icon next to a search bar) are completely invisible to screen readers without an `aria-label`. Furthermore, stateful toggle buttons must have dynamic ARIA labels (e.g., changing from "Select [Item Name]" to "Deselect [Item Name]") to provide context about the *action* that will occur, rather than just the current state.
-**Action:** Always add descriptive, dynamic `aria-label`s to icon-only interactive elements and ensure they have visible focus states (`focus-visible:ring-2`, etc.) for keyboard navigation.
-
-## 2025-02-28 - Screen Reader Accessibility for Date Scrollers
-**Learning:** Custom horizontal date pickers that display abbreviated dates (e.g., "Tue 12") provide a poor screen reader experience because the abbreviated text lacks context and the current selection state is often visually implied rather than semantically declared.
-**Action:** Always provide a fully formatted date string to the `aria-label` (e.g., "Tuesday, March 12th, 2024") and replace custom state indicators (like `data-selected`) with the semantic `aria-pressed` attribute to clearly communicate selection state to assistive technologies.
-
-## 2025-03-05 - Missing Interactive States and Screen Reader Context in Modals
-**Learning:** Custom interactive elements like list reordering arrows and visibility toggle icons in modals often rely heavily on static visual proximity (e.g., an icon next to a title) for meaning, making them confusing for screen readers if generic labels like "Hide widget" are used. Additionally, lacking `focus-visible` styling renders these elements invisible to keyboard users when navigated.
-**Action:** Always verify that icon-only buttons in mapped list elements have dynamic `aria-label`s describing the exact target (e.g., "Hide [Item Name]") and include explicit `focus-visible` styles (e.g., `focus-visible:ring-2`) to ensure full keyboard navigation support.
+**Learning:** Buttons in HTML default to `type="submit"`. In a component-based architecture like React, when buttons are used generically (e.g. for navigating, mapping items, opening modals) but are later wrapped in a `<form>` component (or rendered inside one), they can unintentionally trigger full-page reloads or unwanted form submissions.
+**Action:** Always explicitly define `type="button"` for action buttons that are strictly meant for JavaScript/React interaction rather than form submission, improving resilience against unexpected behaviors.
