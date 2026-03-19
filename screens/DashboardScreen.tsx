@@ -75,12 +75,16 @@ const DashboardScreen: React.FC = () => {
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth();
   const currentDay = today.getDate();
-  const pillsTakenToday = medicationEntries.filter(e => {
-    const entryDate = new Date(e.takenAt);
-    return entryDate.getFullYear() === currentYear &&
-           entryDate.getMonth() === currentMonth &&
-           entryDate.getDate() === currentDay;
-  }).length;
+
+  // ⚡ Bolt: Wrap the filter operation in useMemo to prevent unnecessary array iteration on unrelated state changes (e.g. water intake)
+  const pillsTakenToday = useMemo(() => {
+    return medicationEntries.filter(e => {
+      const entryDate = new Date(e.takenAt);
+      return entryDate.getFullYear() === currentYear &&
+             entryDate.getMonth() === currentMonth &&
+             entryDate.getDate() === currentDay;
+    }).length;
+  }, [medicationEntries, currentYear, currentMonth, currentDay]);
 
   const handleWaterAdd = () => setWaterIntake(waterIntake + 1);
   const handleWaterRemove = () => setWaterIntake(Math.max(0, waterIntake - 1));
