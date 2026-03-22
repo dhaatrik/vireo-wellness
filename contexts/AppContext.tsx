@@ -1,5 +1,5 @@
 
-import React, { createContext, useState, useContext, useCallback } from 'react';
+import React, { createContext, useState, useContext, useCallback, useMemo } from 'react';
 import { FoodItem, Device, DailyMealGroup, MealEntry, MealType, User, Medication, MedicationEntry, Reminder } from '../types';
 import { MOCK_FOOD_ITEMS, MOCK_DEVICES, MOCK_DAILY_MEALS_TODAY, MOCK_USER, MOCK_MEDICATIONS, MOCK_MEDICATION_ENTRIES, MOCK_REMINDERS, MOCK_DASHBOARD_STATS } from '../constants';
 
@@ -37,6 +37,24 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
 
   const allFoodItems = MOCK_FOOD_ITEMS;
   const allMedications = MOCK_MEDICATIONS;
+
+  const foodItemMap = useMemo(() => {
+    const map = new Map<string, FoodItem>();
+    for (let i = 0; i < allFoodItems.length; i++) {
+      const item = allFoodItems[i];
+      map.set(item.id, item);
+    }
+    return map;
+  }, [allFoodItems]);
+
+  const deviceMap = useMemo(() => {
+    const map = new Map<string, Device>();
+    for (let i = 0; i < devices.length; i++) {
+      const device = devices[i];
+      map.set(device.id, device);
+    }
+    return map;
+  }, [devices]);
 
   const updateUserProfile = useCallback((profile: User) => {
     setUserProfile(profile);
@@ -88,12 +106,12 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
   }, []);
 
   const getFoodItemById = useCallback((id: string): FoodItem | undefined => {
-    return allFoodItems.find(item => item.id === id);
-  }, [allFoodItems]);
+    return foodItemMap.get(id);
+  }, [foodItemMap]);
 
   const getDeviceById = useCallback((id: string): Device | undefined => {
-    return devices.find(device => device.id === id);
-  }, [devices]);
+    return deviceMap.get(id);
+  }, [deviceMap]);
 
   const setWaterIntake = useCallback((amount: number) => {
     setWaterIntakeState(Math.max(0, amount)); // Prevent negative water intake

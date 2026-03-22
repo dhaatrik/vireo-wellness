@@ -5,3 +5,7 @@
 ## 2025-03-19 - Caching Date Objects in useMemo
 **Learning:** Avoid caching `new Date()` (representing "today") inside `useMemo` blocks with unrelated dependencies. While wrapping costly filter operations inside `useMemo` is highly beneficial (measured ~99% faster across 10,000 runs), placing `new Date()` directly in the `useMemo` dependencies can result in stale calculations if the app remains open across midnight because the reference date won't update when the actual date changes.
 **Action:** Always compute `new Date()`, `getFullYear()`, `getMonth()`, and `getDate()` outside the `useMemo` hook, then pass those computed primitives as dependencies to the `useMemo` hook. This ensures the filter uses the most up-to-date daily values and avoids unexpected stale state.
+
+## 2025-03-22 - Optimizing Device and Food Item Lookups with useMemo and Maps
+**Learning:** Performing linear lookups (like `.find()`) in React components that are triggered frequently (e.g., inside a `useCallback` that gets passed down through context) can lead to performance degradation, especially as the size of the data grows. Using a `Map` provides $O(1)$ lookup time, which is significantly more efficient than the $O(N)$ lookup of `.find()`.
+**Action:** Use `useMemo` to create a `Map` from arrays that are used for repeated lookups by ID. Ensure the map is rebuilt only when the source array changes. In the lookup function, use `map.get(id)` for efficient retrieval. For React 19, use optimized `for` loops inside `useMemo` to create the Map to minimize overhead.
