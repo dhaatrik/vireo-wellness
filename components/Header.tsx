@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ title, showBackButton = false, backPath
         {showBackButton && (
           <button 
             onClick={handleBack} 
-            className="p-2 -ml-2 rounded-full bg-slate-800/50 text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-200"
+            className="p-2 -ml-2 rounded-full bg-slate-800/50 text-slate-300 hover:text-white hover:bg-slate-700 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             aria-label="Go back"
           >
             <ChevronLeft className="w-5 h-5" />

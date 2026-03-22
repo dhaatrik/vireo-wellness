@@ -171,12 +171,12 @@ const DashboardScreen: React.FC = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsCustomizeOpen(true)}
-                className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200"
+                className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
                 aria-label="Customize Dashboard"
               >
                 <Settings2 className="w-5 h-5" />
               </button>
-              <button className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200" aria-label="Notifications">
+              <button className="relative p-2 text-slate-400 hover:text-white bg-slate-800/50 hover:bg-slate-700 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" aria-label="Notifications">
                 <Bell className="w-5 h-5" />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full border-2 border-slate-900"></span>
               </button>
