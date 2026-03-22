@@ -40,9 +40,11 @@ export interface MedicationEntry {
   takenAt: string; // ISO timestamp
 }
 
+export type ReminderType = 'medication' | 'water' | 'glucose' | 'other';
+
 export interface Reminder {
   id: string;
-  type: 'medication' | 'water' | 'glucose' | 'other';
+  type: ReminderType;
   time: string; // HH:mm format
   message: string;
   isActive: boolean;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Bell, Shield, Activity, ChevronRight, Droplet, Pill, Trash2, Plus } from 'lucide-react';
-import { Reminder } from '../../types';
+import { Reminder, ReminderType } from '../../types';
 import { useAppContext } from '../../contexts/AppContext';
 
 const getReminderIcon = (type: string) => {
@@ -94,7 +94,7 @@ const AddReminderForm = ({ onAdd, onCancel }: AddReminderFormProps) => {
         <div className="flex gap-2">
           <select
             value={newReminder.type}
-            onChange={e => setNewReminder({ ...newReminder, type: e.target.value as any })}
+            onChange={e => setNewReminder({ ...newReminder, type: e.target.value as ReminderType })}
             className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 appearance-none flex-1"
           >
             <option value="medication">Medication</option>
