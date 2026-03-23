@@ -204,13 +204,13 @@ const DashboardScreen: React.FC = () => {
             transition={{ delay: 0.7, duration: 0.4 }}
             className="space-y-3 mt-6"
           >
-            <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group">
+            <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-slate-200 group-hover:text-white">Select a day</span>
                 <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
               </div>
             </button>
-            <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group">
+            <button className="w-full bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-left hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-slate-200 group-hover:text-white">Yesterday</span>
                 <ChevronRight className="w-5 h-5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
