@@ -25,7 +25,7 @@ const MealAccordion: React.FC<MealAccordionProps> = ({ mealGroup, onAddFood }) =
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-slate-800/50 transition-colors"
+        className="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-slate-800/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-inset"
       >
         <div>
           <h3 className="text-lg font-bold text-white capitalize">{mealGroup.mealType.replace('_', ' ')}</h3>
