@@ -12,3 +12,7 @@
 
 **Learning:** When building custom interactive elements like icon-only buttons or interactive cards (e.g., list reordering, toggle visibility, custom stat cards), the default browser focus ring is often suppressed or not visible enough, especially on dark backgrounds.
 **Action:** Always include explicit `focus-visible` styling (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900`) to ensure clear visual tracking for keyboard navigation.
+
+## 2024-03-25 - Focus Visible Styles
+**Learning:** Adding explicit focus-visible styles (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950`) to interactive elements like buttons greatly improves keyboard accessibility, ensuring a clear visual tracking of focus for users navigating with keyboards.
+**Action:** When creating or modifying custom interactive elements (like icon-only buttons or primary action buttons), consistently apply `focus-visible` styling to provide clear visual feedback without compromising the experience for mouse users.

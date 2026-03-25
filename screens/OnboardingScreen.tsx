@@ -85,7 +85,8 @@ const OnboardingScreen: React.FC = () => {
           {step > 1 && (
             <button
               onClick={prevStep}
-              className="p-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl transition-colors"
+              aria-label="Previous step"
+              className="p-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
@@ -93,7 +94,7 @@ const OnboardingScreen: React.FC = () => {
           <button
             onClick={nextStep}
             disabled={(step === 1 && !diabetesType) || (step === 3 && !weightGoal)}
-            className="flex-1 bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-800 disabled:text-slate-500 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2"
+            className="flex-1 bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-800 disabled:text-slate-500 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
           >
             {step === 3 ? 'Finish Setup' : 'Continue'}
             {step < 3 && <ArrowRight className="w-5 h-5" />}
