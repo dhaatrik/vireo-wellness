@@ -28,10 +28,10 @@ const WaterWidget: React.FC<WaterWidgetProps> = ({ waterIntake, onAdd, onRemove,
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <button onClick={onRemove} className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" aria-label="Remove Water">
+        <button type="button" onClick={onRemove} className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-full flex items-center justify-center text-slate-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" aria-label="Remove Water">
           <Minus className="w-5 h-5" />
         </button>
-        <button onClick={onAdd} className="w-10 h-10 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-500/20 transition-all hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" aria-label="Add Water">
+        <button type="button" onClick={onAdd} className="w-10 h-10 bg-blue-500 hover:bg-blue-400 rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-500/20 transition-all hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900" aria-label="Add Water">
           <Plus className="w-5 h-5" />
         </button>
       </div>

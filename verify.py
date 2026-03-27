@@ -1,50 +1,36 @@
 from playwright.sync_api import sync_playwright
+import time
 
-def test_dashboard_modal():
+def verify_ux_changes():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        context = browser.new_context()
-        page = context.new_page()
+        page = browser.new_page()
+        page.set_viewport_size({"width": 1280, "height": 800})
 
+        # Bypass onboarding properly
         page.goto("http://localhost:3000/")
+        page.evaluate("window.localStorage.setItem('hasCompletedOnboarding', 'true')")
+        page.evaluate("window.localStorage.setItem('isLoggedIn', 'true')")
+        page.evaluate("window.localStorage.setItem('userProfile', JSON.stringify({'name':'Rohit Kumar','phone':'0000000000','countryCode':'US'}))")
+        page.reload()
 
-        print("Clicking Get Started")
-        page.get_by_role("button", name="Get Started").click()
+        time.sleep(1)
+        page.goto("http://localhost:3000/#/dashboard")
 
-        print("Filling Name/Phone")
-        page.get_by_placeholder("Rohit Kumar").fill("Test User")
-        page.get_by_placeholder("0000000000").fill("5555555555")
-        page.get_by_role("button", name="Continue").click()
+        # Wait a moment for rendering
+        time.sleep(2)
 
-        print("Selecting Diabetes Type")
-        page.get_by_role("button", name="Type 1").click()
-        page.get_by_role("button", name="Continue").click()
+        # Take a screenshot of the main dashboard, which includes the Water and Chart widgets
+        page.screenshot(path="/app/dashboard_widgets.png")
 
-        print("Selecting target range")
-        page.get_by_role("button", name="Continue").click()
-
-        print("Selecting weight goal")
-        page.get_by_role("button", name="Lose Weight").click()
-        page.get_by_role("button", name="Finish Setup").click()
-
-        # Step 5 is already dashboard
-        print("Waiting for Dashboard")
-        page.wait_for_selector("text=Overview", timeout=10000)
-
-        print("Looking for Customize")
-        try:
-             page.get_by_role("button", name="Customize Dashboard").click()
-        except Exception:
-             try:
-                 page.locator("button[aria-label='Customize dashboard']").click()
-             except Exception as e:
-                 print("Could not find customize button:", e)
-
-        page.wait_for_timeout(1000)
-        page.screenshot(path="verification.png")
-        print("Screenshot saved to verification.png")
+        # Open the Customize Dashboard Modal
+        settings_button = page.locator("button[aria-label='Customize Dashboard']")
+        if settings_button.count() > 0:
+            settings_button.click()
+            time.sleep(1)
+            page.screenshot(path="/app/customize_modal.png")
 
         browser.close()
 
 if __name__ == "__main__":
-    test_dashboard_modal()
+    verify_ux_changes()

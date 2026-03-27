@@ -53,7 +53,7 @@ const CustomizeDashboardModal = ({ isOpen, onClose, widgets, onSave }: Customize
           >
             <div className="flex justify-between items-center mb-6 shrink-0">
               <h2 className="text-xl font-semibold text-white">Customize Dashboard</h2>
-              <button onClick={onClose} className="p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors" aria-label="Close modal">
+              <button type="button" onClick={onClose} className="p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors" aria-label="Close modal">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -64,6 +64,7 @@ const CustomizeDashboardModal = ({ isOpen, onClose, widgets, onSave }: Customize
                   <div className="flex items-center gap-3">
                     <div className="flex flex-col gap-1">
                       <button 
+                        type="button"
                         onClick={() => moveWidget(index, -1)} 
                         disabled={index === 0}
                         className="text-slate-500 hover:text-emerald-400 disabled:opacity-30 disabled:hover:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-md"
@@ -72,6 +73,7 @@ const CustomizeDashboardModal = ({ isOpen, onClose, widgets, onSave }: Customize
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6"/></svg>
                       </button>
                       <button 
+                        type="button"
                         onClick={() => moveWidget(index, 1)} 
                         disabled={index === localWidgets.length - 1}
                         className="text-slate-500 hover:text-emerald-400 disabled:opacity-30 disabled:hover:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-md"
@@ -83,6 +85,7 @@ const CustomizeDashboardModal = ({ isOpen, onClose, widgets, onSave }: Customize
                     <span className={`font-medium ${widget.visible ? 'text-white' : 'text-slate-500'}`}>{widget.title}</span>
                   </div>
                   <button 
+                    type="button"
                     onClick={() => toggleVisibility(index)}
                     className={`p-2 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${widget.visible ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-400'}`}
                     aria-label={widget.visible ? `Hide ${widget.title}` : `Show ${widget.title}`}
@@ -94,6 +97,7 @@ const CustomizeDashboardModal = ({ isOpen, onClose, widgets, onSave }: Customize
             </div>
 
             <button 
+              type="button"
               onClick={handleSave}
               className="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-white font-bold rounded-2xl transition-colors shrink-0"
             >

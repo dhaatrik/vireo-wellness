@@ -22,7 +22,7 @@ const ChartWidget: React.FC<ChartWidgetProps> = ({ data, delay }) => {
     >
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-bold text-white">Blood Sugar</h3>
-        <button type="button" className="text-xs font-medium text-emerald-400 hover:text-emerald-300">View All</button>
+        <button type="button" className="text-xs font-medium text-emerald-400 hover:text-emerald-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded px-2 py-1">View All</button>
       </div>
       <BloodSugarChart data={data} />
     </motion.div>
