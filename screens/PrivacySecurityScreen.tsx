@@ -53,8 +53,12 @@ const PrivacySecurityScreen: React.FC = () => {
                 </div>
               </div>
               <button 
+                type="button"
+                role="switch"
+                aria-checked={biometricsEnabled}
+                aria-label="Toggle Biometric Login"
                 onClick={() => setBiometricsEnabled(!biometricsEnabled)}
-                className={`w-12 h-6 rounded-full transition-colors duration-300 relative ${biometricsEnabled ? 'bg-emerald-500' : 'bg-slate-700'}`}
+                className={`w-12 h-6 rounded-full transition-colors duration-300 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${biometricsEnabled ? 'bg-emerald-500' : 'bg-slate-700'}`}
               >
                 <span className={`absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 ${biometricsEnabled ? 'translate-x-6' : 'translate-x-0'}`} />
               </button>
@@ -71,8 +75,12 @@ const PrivacySecurityScreen: React.FC = () => {
                 </div>
               </div>
               <button 
+                type="button"
+                role="switch"
+                aria-checked={twoFactorEnabled}
+                aria-label="Toggle Two-Factor Authentication"
                 onClick={() => setTwoFactorEnabled(!twoFactorEnabled)}
-                className={`w-12 h-6 rounded-full transition-colors duration-300 relative ${twoFactorEnabled ? 'bg-emerald-500' : 'bg-slate-700'}`}
+                className={`w-12 h-6 rounded-full transition-colors duration-300 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${twoFactorEnabled ? 'bg-emerald-500' : 'bg-slate-700'}`}
               >
                 <span className={`absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 ${twoFactorEnabled ? 'translate-x-6' : 'translate-x-0'}`} />
               </button>
@@ -98,8 +106,12 @@ const PrivacySecurityScreen: React.FC = () => {
                 </div>
               </div>
               <button 
+                type="button"
+                role="switch"
+                aria-checked={dataSharingEnabled}
+                aria-label="Toggle Data Sharing"
                 onClick={() => setDataSharingEnabled(!dataSharingEnabled)}
-                className={`w-12 h-6 rounded-full transition-colors duration-300 relative ${dataSharingEnabled ? 'bg-emerald-500' : 'bg-slate-700'}`}
+                className={`w-12 h-6 rounded-full transition-colors duration-300 relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 ${dataSharingEnabled ? 'bg-emerald-500' : 'bg-slate-700'}`}
               >
                 <span className={`absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform duration-300 ${dataSharingEnabled ? 'translate-x-6' : 'translate-x-0'}`} />
               </button>

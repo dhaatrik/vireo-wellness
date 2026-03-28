@@ -20,6 +20,7 @@ export const TargetGlucoseStep = ({ targetGlucose, setTargetGlucose }: TargetGlu
           value={targetGlucose[0]}
           onChange={(e) => setTargetGlucose([parseInt(e.target.value), targetGlucose[1]])}
           className="w-full accent-emerald-500 mb-8"
+          aria-label="Minimum target glucose"
         />
 
         <div className="flex justify-between items-center mb-6">
@@ -32,6 +33,7 @@ export const TargetGlucoseStep = ({ targetGlucose, setTargetGlucose }: TargetGlu
           value={targetGlucose[1]}
           onChange={(e) => setTargetGlucose([targetGlucose[0], parseInt(e.target.value)])}
           className="w-full accent-rose-500"
+          aria-label="Maximum target glucose"
         />
       </div>
     </>
