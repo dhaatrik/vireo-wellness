@@ -18,7 +18,7 @@ const NavItem = ({ to, icon: Icon, label }: NavItemProps) => {
   return (
     <NavLink
       to={to}
-      className={`relative flex flex-col md:flex-row md:justify-start md:px-6 items-center justify-center flex-1 md:flex-none py-3 md:py-4 transition-colors duration-300 ${
+      className={`relative flex flex-col md:flex-row md:justify-start md:px-6 items-center justify-center flex-1 md:flex-none py-3 md:py-4 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded-xl ${
         isActive ? 'text-emerald-400 md:bg-emerald-500/10' : 'text-slate-500 hover:text-slate-300 md:hover:bg-slate-800/50'
       }`}
     >

@@ -2,12 +2,10 @@ import React from 'react';
 import { motion } from 'motion/react';
 import BloodSugarChart from '../BloodSugarChart';
 
+import { BloodSugarReading } from '../../types';
+
 interface ChartWidgetProps {
-  data: Array<{
-    time: string;
-    value: number;
-    meal: string;
-  }>;
+  data: BloodSugarReading[];
   delay: number;
 }
 
