@@ -94,6 +94,7 @@ const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => (
   <div className="px-5 pt-4 pb-2 bg-slate-950">
     <div className="relative group">
       <input
+        aria-label="Search food"
         type="text"
         placeholder="Search food..."
         value={searchTerm}

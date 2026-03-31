@@ -17,6 +17,7 @@ const COUNTRIES = [
 ];
 
 interface ProfileFieldProps {
+  id?: string;
   icon: ElementType;
   label: string;
   children: ReactNode;
@@ -24,14 +25,14 @@ interface ProfileFieldProps {
   alignStart?: boolean;
 }
 
-function ProfileField({ icon: Icon, label, children, border = true, alignStart = false }: ProfileFieldProps) {
+function ProfileField({ id, icon: Icon, label, children, border = true, alignStart = false }: ProfileFieldProps) {
   return (
     <div className={`p-4 ${border ? 'border-b border-slate-800/50' : ''} flex ${alignStart ? 'items-start' : 'items-center'} gap-3`}>
       <div className={`p-2 bg-slate-800 rounded-xl ${alignStart ? 'mt-1' : ''}`}>
         <Icon className="w-5 h-5 text-slate-400" />
       </div>
       <div className="flex-grow">
-        <label className="text-xs text-slate-500 font-medium block mb-0.5">{label}</label>
+        <label htmlFor={id} className="text-xs text-slate-500 font-medium block mb-0.5">{label}</label>
         {children}
       </div>
     </div>
@@ -103,9 +104,10 @@ export default function ProfileSection() {
       </div>
 
       <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden">
-        <ProfileField icon={User} label="Full Name">
+        <ProfileField id="profile-name" icon={User} label="Full Name">
           {isEditingProfile ? (
             <input
+              id="profile-name"
               type="text"
               value={profileData.name}
               maxLength={50}
@@ -113,14 +115,15 @@ export default function ProfileSection() {
               className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-emerald-500"
             />
           ) : (
-            <span className="text-sm font-medium text-white block">{profileData.name}</span>
+            <span id="profile-name" className="text-sm font-medium text-white block">{profileData.name}</span>
           )}
         </ProfileField>
 
-        <ProfileField icon={Mail} label="Email Address" alignStart>
+        <ProfileField id="profile-email" icon={Mail} label="Email Address" alignStart>
           {isEditingProfile ? (
             <>
               <input
+                id="profile-email"
                 type="email"
                 value={profileData.email}
                 maxLength={100}
@@ -135,15 +138,16 @@ export default function ProfileSection() {
               {emailError && <p className="text-xs text-rose-500 mt-1">{emailError}</p>}
             </>
           ) : (
-            <span className="text-sm font-medium text-white block">{profileData.email}</span>
+            <span id="profile-email" className="text-sm font-medium text-white block">{profileData.email}</span>
           )}
         </ProfileField>
 
-        <ProfileField icon={Phone} label="Phone Number" border={false} alignStart>
+        <ProfileField id="profile-phone" icon={Phone} label="Phone Number" border={false} alignStart>
           {isEditingProfile ? (
             <div className="flex gap-2">
               <div className="relative w-24 shrink-0">
                 <select
+                  aria-label="Country Code"
                   value={selectedCountry.code}
                   onChange={(e) => {
                     const country = COUNTRIES.find(c => c.code === e.target.value);
@@ -162,6 +166,7 @@ export default function ProfileSection() {
                 </div>
               </div>
               <input
+                id="profile-phone"
                 type="tel"
                 value={profileData.phone}
                 maxLength={10}
@@ -171,7 +176,7 @@ export default function ProfileSection() {
               />
             </div>
           ) : (
-            <span className="text-sm font-medium text-white block">{selectedCountry.isd} {profileData.phone}</span>
+            <span id="profile-phone" className="text-sm font-medium text-white block">{selectedCountry.isd} {profileData.phone}</span>
           )}
         </ProfileField>
       </div>

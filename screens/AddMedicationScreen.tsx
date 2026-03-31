@@ -39,6 +39,7 @@ const AddMedicationScreen = () => {
             <div className="px-5 pt-4 pb-2 z-10 bg-slate-950/80 backdrop-blur-md sticky top-0">
                 <div className="relative">
                     <input
+                        aria-label="Search medications"
                         type="text"
                         placeholder="Search medications..."
                         value={searchQuery}

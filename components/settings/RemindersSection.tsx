@@ -85,6 +85,7 @@ const AddReminderForm = ({ onAdd, onCancel }: AddReminderFormProps) => {
     <div className="p-4 border-b border-slate-800/50 bg-slate-800/20">
       <div className="space-y-3">
         <input
+          aria-label="Reminder message"
           type="text"
           placeholder="Reminder message..."
           value={newReminder.message}
@@ -95,6 +96,7 @@ const AddReminderForm = ({ onAdd, onCancel }: AddReminderFormProps) => {
         />
         <div className="flex gap-2">
           <select
+            aria-label="Reminder type"
             value={newReminder.type}
             onChange={e => setNewReminder({ ...newReminder, type: e.target.value as ReminderType })}
             className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 appearance-none flex-1"
@@ -105,6 +107,7 @@ const AddReminderForm = ({ onAdd, onCancel }: AddReminderFormProps) => {
             <option value="other">Other</option>
           </select>
           <input
+            aria-label="Reminder time"
             type="time"
             value={newReminder.time}
             onChange={e => setNewReminder({ ...newReminder, time: e.target.value })}
