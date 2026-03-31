@@ -25,6 +25,8 @@ const MealAccordion: React.FC<MealAccordionProps> = ({ mealGroup, onAddFood }) =
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls={`meal-content-${mealGroup.mealType}`}
         className="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-slate-800/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-inset"
       >
         <div>
@@ -38,6 +40,7 @@ const MealAccordion: React.FC<MealAccordionProps> = ({ mealGroup, onAddFood }) =
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id={`meal-content-${mealGroup.mealType}`}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
