@@ -86,6 +86,7 @@ const LoginScreen: React.FC = () => {
             <div className="flex gap-2">
               <div className="relative w-32 shrink-0">
                 <select
+                  aria-label="Country Code"
                   value={selectedCountry.code}
                   onChange={(e) => {
                     const country = COUNTRIES.find(c => c.code === e.target.value);
