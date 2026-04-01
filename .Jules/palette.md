@@ -5,3 +5,6 @@
 ## 2026-03-29 - Labeling Interactive Forms in Edit Modes
 **Learning:** In screens with "view" vs "edit" toggles (like the Profile settings), standard structural inputs often replace static text dynamically. It's critical to ensure the label dynamically pairs with the input, e.g. using `id` and `htmlFor`, because context is easily lost by screen readers when elements hot-swap.
 **Action:** Always provide explicit `id` attributes that link to labels natively, or provide clear `aria-label` attributes to the newly generated `input` or `select` elements when structural labels aren't an option.
+## 2024-06-12 - Labeling Grouped Inputs
+**Learning:** When multiple inputs (like a country code `<select>` and a phone number `<input>`) share a single visual `<label>`, screen readers may only associate the label with the input specified in the `htmlFor` attribute. The other input, such as the country code dropdown, will often be announced simply as "combo box" without context.
+**Action:** Always provide an explicit `aria-label` (e.g., `aria-label="Country Code"`) to inputs within a visual group that do not have a direct, unique structural `<label>` linked via `id`.
