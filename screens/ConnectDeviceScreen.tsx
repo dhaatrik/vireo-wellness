@@ -149,6 +149,7 @@ const ConnectDeviceScreen = () => {
             <button
                 onClick={handleAddDevice}
                 disabled={isConnecting}
+                title={isConnecting ? "Please wait while the device is pairing" : undefined}
                 className={`w-full font-bold py-4 px-4 rounded-2xl shadow-xl transition-all duration-300 active:scale-[0.98] ${
                   isConnecting 
                     ? 'bg-slate-800 text-slate-400 border border-slate-700 cursor-not-allowed' 

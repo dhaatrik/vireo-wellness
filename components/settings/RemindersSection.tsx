@@ -116,7 +116,7 @@ const AddReminderForm = ({ onAdd, onCancel }: AddReminderFormProps) => {
         </div>
         <div className="flex justify-end gap-2 pt-2">
           <button type="button" onClick={onCancel} className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors">Cancel</button>
-          <button type="button" onClick={handleSubmit} disabled={!newReminder.message.trim()} className="px-4 py-2 text-xs font-semibold bg-emerald-500 text-slate-950 rounded-lg hover:bg-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Add Reminder</button>
+          <button type="button" onClick={handleSubmit} disabled={!newReminder.message.trim()} title={!newReminder.message.trim() ? "Please enter a reminder message" : undefined} className="px-4 py-2 text-xs font-semibold bg-emerald-500 text-slate-950 rounded-lg hover:bg-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Add Reminder</button>
         </div>
       </div>
     </div>
