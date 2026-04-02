@@ -130,15 +130,28 @@ const FoodListItem = ({ item, onToggleSelect, onViewDetails }: FoodListItemProps
           : 'bg-slate-800/50 border-slate-700/50 hover:bg-slate-800 hover:border-slate-600'
       }`}
     >
-      <img 
-        src={item.imageUrl || `https://picsum.photos/seed/${item.id}/100/100`} 
-        alt={item.name} 
-        className="w-16 h-16 rounded-xl object-cover mr-4 cursor-pointer shadow-sm"
+      <div
+        role="button"
+        tabIndex={0}
         onClick={() => onViewDetails(item.id)}
-      />
-      <div className="flex-grow cursor-pointer" onClick={() => onViewDetails(item.id)}>
-        <h3 className="text-base font-bold text-white mb-0.5">{item.name}</h3>
-        <p className="text-sm font-medium text-emerald-400">{item.calories} <span className="text-slate-500 text-xs">kcal</span></p>
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onViewDetails(item.id);
+          }
+        }}
+        aria-label={`View details for ${item.name}`}
+        className="flex flex-1 items-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 rounded-xl"
+      >
+        <img
+          src={item.imageUrl || `https://picsum.photos/seed/${item.id}/100/100`}
+          alt={item.name}
+          className="w-16 h-16 rounded-xl object-cover mr-4 shadow-sm"
+        />
+        <div className="flex-grow">
+          <h3 className="text-base font-bold text-white mb-0.5">{item.name}</h3>
+          <p className="text-sm font-medium text-emerald-400">{item.calories} <span className="text-slate-500 text-xs">kcal</span></p>
+        </div>
       </div>
       <button 
         onClick={() => onToggleSelect(item.id)} 

@@ -8,3 +8,7 @@
 ## 2024-06-12 - Labeling Grouped Inputs
 **Learning:** When multiple inputs (like a country code `<select>` and a phone number `<input>`) share a single visual `<label>`, screen readers may only associate the label with the input specified in the `htmlFor` attribute. The other input, such as the country code dropdown, will often be announced simply as "combo box" without context.
 **Action:** Always provide an explicit `aria-label` (e.g., `aria-label="Country Code"`) to inputs within a visual group that do not have a direct, unique structural `<label>` linked via `id`.
+
+## 2024-05-25 - Interactive List Elements Keyboard Support
+**Learning:** When creating interactive list items (like food items in AddMealScreen) that rely on `onClick` handlers attached to structural elements like `div` instead of semantic `<button>`s, keyboard users (using Tab and Enter/Space) are unable to focus or activate them. This breaks the navigation flow and renders features completely inaccessible to keyboard and screen reader users.
+**Action:** Whenever a non-semantic element is made interactive via `onClick`, always ensure it is paired with `role="button"`, `tabIndex={0}`, an `onKeyDown` handler to capture 'Enter' and ' ' (Space) keys, and explicit `focus-visible` styling to provide a clear visual indicator for keyboard navigation.
