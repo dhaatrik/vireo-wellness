@@ -25,6 +25,7 @@ const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd }: SelectionBa
         className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-slate-950 via-slate-950 to-transparent pt-12 pb-safe"
       >
         <button
+          type="button"
           onClick={onAdd}
           className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98] flex items-center justify-between"
         >
@@ -71,6 +72,7 @@ const CategoryTabs = ({ tabs, activeTab, onTabSelect }: CategoryTabsProps) => (
       {tabs.map(tab => (
         <button
           key={tab}
+          type="button"
           onClick={() => onTabSelect(tab)}
           className={`px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300
             ${activeTab === tab
@@ -104,6 +106,7 @@ const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => (
       />
       <Search className="w-5 h-5 text-slate-500 absolute left-4 top-1/2 transform -translate-y-1/2 group-focus-within:text-emerald-500 transition-colors" />
       <button
+        type="button"
         className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1.5 text-slate-400 hover:text-white bg-slate-800 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
         aria-label="Filter search results"
       >
@@ -141,6 +144,7 @@ const FoodListItem = ({ item, onToggleSelect, onViewDetails }: FoodListItemProps
         <p className="text-sm font-medium text-emerald-400">{item.calories} <span className="text-slate-500 text-xs">kcal</span></p>
       </div>
       <button 
+        type="button"
         onClick={() => onToggleSelect(item.id)} 
         className="ml-4 p-3 rounded-full hover:bg-slate-700/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
         aria-label={item.isSelected ? `Deselect ${item.name}` : `Select ${item.name}`}

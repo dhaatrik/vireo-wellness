@@ -87,6 +87,7 @@ export default function ProfileSection() {
       <div className="flex items-center justify-between mb-4 px-1">
         <h2 className="text-xs font-bold uppercase tracking-widest text-slate-500">Profile</h2>
         <button
+          type="button"
           onClick={isEditingProfile ? handleSaveProfile : () => setIsEditingProfile(true)}
           disabled={isEditingProfile && (profileData.phone.length !== 10 || !!emailError)}
           className="text-xs font-bold text-emerald-500 flex items-center gap-1 hover:text-emerald-400 disabled:text-slate-500 transition-colors"

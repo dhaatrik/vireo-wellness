@@ -24,6 +24,7 @@ const MealAccordion: React.FC<MealAccordionProps> = ({ mealGroup, onAddFood }) =
       className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden transition-all duration-300"
     >
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls={`meal-content-${mealGroup.mealType}`}
@@ -62,6 +63,7 @@ const MealAccordion: React.FC<MealAccordionProps> = ({ mealGroup, onAddFood }) =
                 </ul>
               )}
               <button
+                type="button"
                 onClick={() => onAddFood(mealGroup.mealType)}
                 aria-label={`Add Food to ${mealGroup.mealType.replace('_', ' ').toLowerCase()}`}
                 className="mt-4 w-full py-3 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-medium rounded-xl flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
@@ -173,6 +175,7 @@ const DailyMealsScreen: React.FC = () => {
             className="pt-2"
           >
             <button
+              type="button"
               onClick={() => navigate('/add-meal', { state: { selectedDate: selectedDate.toISOString() } })}
               className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
             >

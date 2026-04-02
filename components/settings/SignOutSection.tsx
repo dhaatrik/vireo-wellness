@@ -20,6 +20,7 @@ const SignOutSection: React.FC = () => {
       transition={{ delay: 0.3 }}
     >
       <button
+        type="button"
         onClick={handleSignOut}
         className="w-full bg-slate-900 border border-slate-800 hover:bg-slate-800 p-4 rounded-3xl flex items-center justify-center gap-2 text-rose-500 font-bold transition-colors"
       >
