@@ -55,8 +55,9 @@ const BottomNav = () => {
           
           <div className="flex-1 md:flex-none flex justify-center md:justify-start md:px-6 -mt-6 md:mt-4 md:mb-4">
             <button
+              type="button"
               onClick={() => setIsQuickAddOpen(true)}
-              className="flex items-center justify-center md:justify-start md:px-4 w-14 h-14 md:w-full md:h-12 bg-emerald-500 rounded-2xl text-white shadow-xl shadow-emerald-500/30 hover:bg-emerald-400 hover:scale-105 active:scale-95 transition-all duration-300"
+              className="flex items-center justify-center md:justify-start md:px-4 w-14 h-14 md:w-full md:h-12 bg-emerald-500 rounded-2xl text-white shadow-xl shadow-emerald-500/30 hover:bg-emerald-400 hover:scale-105 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
               aria-label="Quick Add"
             >
               <Plus className="w-7 h-7 md:w-5 md:h-5 stroke-[2.5px] md:mr-2" />
