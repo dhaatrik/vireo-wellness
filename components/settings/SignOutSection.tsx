@@ -9,8 +9,10 @@ const SignOutSection: React.FC = () => {
   const { updateUserProfile } = useAppContext();
 
   const handleSignOut = () => {
-    updateUserProfile({ name: '', email: '', phone: '', countryCode: 'US' });
-    navigate('/');
+    if (window.confirm("Are you sure you want to sign out?")) {
+      updateUserProfile({ name: '', email: '', phone: '', countryCode: 'US' });
+      navigate('/');
+    }
   };
 
   return (
@@ -21,7 +23,7 @@ const SignOutSection: React.FC = () => {
     >
       <button
         onClick={handleSignOut}
-        className="w-full bg-slate-900 border border-slate-800 hover:bg-slate-800 p-4 rounded-3xl flex items-center justify-center gap-2 text-rose-500 font-bold transition-colors"
+        className="w-full bg-slate-900 border border-slate-800 hover:bg-slate-800 p-4 rounded-3xl flex items-center justify-center gap-2 text-rose-500 font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
       >
         <LogOut className="w-5 h-5" />
         Sign Out
