@@ -44,9 +44,10 @@ const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd }: SelectionBa
 
 interface EmptyStateProps {
   searchTerm: string;
+  onClear: () => void;
 }
 
-const EmptyState = ({ searchTerm }: EmptyStateProps) => (
+const EmptyState = ({ searchTerm, onClear }: EmptyStateProps) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -57,6 +58,12 @@ const EmptyState = ({ searchTerm }: EmptyStateProps) => (
     </div>
     <p className="text-slate-400 font-medium">No food items found matching "{searchTerm}"</p>
     <p className="text-slate-500 text-sm mt-1">Try searching for something else</p>
+    <button
+      onClick={onClear}
+      className="mt-6 px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-medium rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+    >
+      Clear search
+    </button>
   </motion.div>
 );
 
@@ -260,7 +267,7 @@ const AddMealScreen = () => {
                   />
                 ))
             ) : (
-                <EmptyState searchTerm={searchTerm} />
+                <EmptyState searchTerm={searchTerm} onClear={() => setSearchTerm('')} />
             )}
           </AnimatePresence>
         </div>
