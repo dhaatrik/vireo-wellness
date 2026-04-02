@@ -90,7 +90,9 @@ export default function ProfileSection() {
           type="button"
           onClick={isEditingProfile ? handleSaveProfile : () => setIsEditingProfile(true)}
           disabled={isEditingProfile && (profileData.phone.length !== 10 || !!emailError)}
-          className="text-xs font-bold text-emerald-500 flex items-center gap-1 hover:text-emerald-400 disabled:text-slate-500 transition-colors"
+          className="text-xs font-bold text-emerald-500 flex items-center gap-1 hover:text-emerald-400 disabled:text-slate-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded px-1 py-0.5 -mr-1"
+          aria-label={isEditingProfile ? "Save profile changes" : "Edit profile"}
+          title={isEditingProfile && (profileData.phone.length !== 10 || !!emailError) ? "Please fix validation errors to save" : undefined}
         >
           {isEditingProfile ? (
             <>
