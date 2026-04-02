@@ -39,13 +39,14 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-semibold text-white">Quick Add</h2>
-              <button onClick={onClose} className="p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors" aria-label="Close Quick Add">
+              <button type="button" onClick={onClose} className="p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors" aria-label="Close Quick Add">
                 <X className="w-5 h-5" />
               </button>
             </div>
             
             <div className="grid grid-cols-3 gap-4">
               <button 
+                type="button"
                 onClick={() => handleAction('/add-meal')}
                 className="flex flex-col items-center justify-center p-4 bg-slate-800/50 hover:bg-emerald-500/20 border border-slate-700 hover:border-emerald-500/50 rounded-2xl transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
               >
@@ -56,6 +57,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
               </button>
 
               <button 
+                type="button"
                 onClick={() => handleAction('')}
                 className="flex flex-col items-center justify-center p-4 bg-slate-800/50 hover:bg-blue-500/20 border border-slate-700 hover:border-blue-500/50 rounded-2xl transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
               >
@@ -66,6 +68,7 @@ const QuickAddModal: React.FC<QuickAddModalProps> = ({ isOpen, onClose }) => {
               </button>
 
               <button 
+                type="button"
                 onClick={() => handleAction('')}
                 className="flex flex-col items-center justify-center p-4 bg-slate-800/50 hover:bg-purple-500/20 border border-slate-700 hover:border-purple-500/50 rounded-2xl transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
               >

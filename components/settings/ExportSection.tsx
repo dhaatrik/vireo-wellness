@@ -59,6 +59,7 @@ const ExportSection: React.FC = () => {
       <h2 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 px-1">Export Data</h2>
       <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden">
         <button
+          type="button"
           onClick={handleGenerateReport}
           className="w-full p-4 flex items-center justify-between hover:bg-slate-800/50 transition-colors"
         >
