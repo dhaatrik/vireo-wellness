@@ -72,7 +72,13 @@ const DailyMedicationsScreen: React.FC = () => {
                         </div>
                         <div className="p-5 pt-0 mt-2">
                             {entriesForSelectedDate.length === 0 ? (
-                                <p className="text-slate-500 text-sm italic py-2">No medications logged for this day.</p>
+                                <div className="flex flex-col items-center justify-center py-8 text-center">
+                                    <div className="w-16 h-16 bg-slate-800/50 rounded-full flex items-center justify-center mb-4">
+                                        <Pill className="w-8 h-8 text-slate-500" />
+                                    </div>
+                                    <p className="text-slate-300 font-medium mb-1">No medications logged</p>
+                                    <p className="text-slate-500 text-sm">Keep track of your daily doses.</p>
+                                </div>
                             ) : (
                                 <ul className="space-y-4 py-2">
                                     <AnimatePresence>

@@ -80,7 +80,6 @@ const CategoryTabs = ({ tabs, activeTab, onTabSelect }: CategoryTabsProps) => (
         <button
           type="button"
           key={tab}
-          type="button"
           onClick={() => onTabSelect(tab)}
           className={`px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-300
             ${activeTab === tab
