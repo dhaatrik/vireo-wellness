@@ -18,11 +18,10 @@ const getDeviceIcon = (name: string) => {
 
 interface DeviceListItemProps {
   device: Device;
-  onConnect: (deviceId: string) => void;
   index: number;
 }
 
-const DeviceListItem: React.FC<DeviceListItemProps> = ({ device, onConnect, index }) => {
+const DeviceListItem: React.FC<DeviceListItemProps> = ({ device, index }) => {
   const navigate = useNavigate();
   
   const handleItemClick = () => {
@@ -82,7 +81,7 @@ const DeviceListItem: React.FC<DeviceListItemProps> = ({ device, onConnect, inde
 };
 
 const DevicesScreen: React.FC = () => {
-  const { devices, connectDevice } = useAppContext();
+  const { devices } = useAppContext();
 
   // ⚡ Bolt: Combine multiple .filter() calls into a single loop and memoize to avoid recalculations on every render.
   const { availableToConnect, connectedDevices } = useMemo(() => {
@@ -110,7 +109,7 @@ const DevicesScreen: React.FC = () => {
             <h2 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 px-1">Connected</h2>
             <div className="space-y-3">
               {connectedDevices.map((device, index) => (
-                <DeviceListItem key={device.id} device={device} onConnect={connectDevice} index={index} />
+                <DeviceListItem key={device.id} device={device} index={index} />
               ))}
             </div>
           </section>
@@ -121,7 +120,7 @@ const DevicesScreen: React.FC = () => {
             <h2 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4 px-1">Available to connect</h2>
             <div className="space-y-3">
               {availableToConnect.map((device, index) => (
-                <DeviceListItem key={device.id} device={device} onConnect={connectDevice} index={index + connectedDevices.length} />
+                <DeviceListItem key={device.id} device={device} index={index + connectedDevices.length} />
               ))}
             </div>
           </section>

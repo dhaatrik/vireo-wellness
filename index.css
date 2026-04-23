@@ -16,14 +16,20 @@
   width: 6px;
   height: 6px;
 }
+
 /* Dark theme scrollbar */
 ::-webkit-scrollbar-track {
-  background: #0f172a; /* slate-900 */
+  background: #0f172a;
+  /* slate-900 */
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #334155; /* slate-700 */
+  background: #334155;
+  /* slate-700 */
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569; /* slate-600 */
+  background: #475569;
+  /* slate-600 */
 }
