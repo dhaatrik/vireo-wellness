@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import SplashScreen from './screens/SplashScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import InsightsScreen from './screens/InsightsScreen';
@@ -20,14 +20,16 @@ import { AppContextProvider } from './contexts/AppContext';
 const App: React.FC = () => {
   React.useEffect(() => {
     // Always start from the flash screen on initial load
-    window.location.hash = '/';
+    if (window.location.pathname !== '/') {
+      window.location.pathname = '/';
+    }
   }, []);
 
   return (
     <AppContextProvider>
       <div className="min-h-screen w-full bg-slate-950 flex justify-center text-slate-100 font-sans selection:bg-emerald-500/30">
         <div className="w-full bg-slate-900 min-h-screen shadow-2xl shadow-emerald-900/20 flex flex-col md:flex-row relative overflow-hidden sm:border-x sm:border-slate-800/50">
-          <HashRouter>
+          <BrowserRouter>
             <Routes>
               <Route path="/" element={<SplashScreen />} />
               <Route path="/login" element={<LoginScreen />} />
@@ -45,7 +47,7 @@ const App: React.FC = () => {
               <Route path="/privacy-security" element={<PrivacySecurityScreen />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-          </HashRouter>
+          </BrowserRouter>
         </div>
       </div>
     </AppContextProvider>
