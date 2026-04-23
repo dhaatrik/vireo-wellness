@@ -6,11 +6,11 @@
     - [ ] Implement Feature: Create `src/services/mealService.ts` with `getMeals`, `logMeal`, `getMealDetails` methods.
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Setup API Service Layer' (Protocol in workflow.md) (b3d7ce0)
 
-## Phase 2: Integrate Service with State Management
+## Phase 2: Integrate Service with State Management [checkpoint: 1fa8f14]
 - [x] Task: Update AppContext or Context provider for meals (4b3f2da)
     - [ ] Write Tests: Update `AppContext.test.tsx` to handle asynchronous meal fetching and mocking the new service.
     - [ ] Implement Feature: Update `AppContext.tsx` to replace mock data with calls to `mealService`.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Integrate Service with State Management' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Integrate Service with State Management' (Protocol in workflow.md) (1fa8f14)
 
 ## Phase 3: Update UI Components
 - [ ] Task: Connect Meal Logging UI to new state
