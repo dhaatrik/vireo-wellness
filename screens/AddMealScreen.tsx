@@ -190,6 +190,7 @@ const AddMealScreen = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<TabName>("Meals");
   const [selectedItems, setSelectedItems] = useState<Record<string, SelectedFoodItem>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // ⚡ Bolt: Pre-compute lower-case names to avoid expensive string transformations on every search keystroke.
   const allFoodItemsWithLower = useMemo(() => {
@@ -240,16 +241,22 @@ const AddMealScreen = () => {
   const numSelected = selectedFoodItemsList.length;
   const totalSelectedCalories = selectedFoodItemsList.reduce((sum, item) => sum + item.calories, 0);
 
-  const handleAddSelectedItems = () => {
-    if (numSelected === 0) return;
+  const handleAddSelectedItems = async () => {
+    if (numSelected === 0 || isSubmitting) return;
     
-    const mealTypeToAdd = targetMealTypeFromState || MealType.SNACK; 
+    setIsSubmitting(true);
+    try {
+      const mealTypeToAdd = targetMealTypeFromState || MealType.SNACK; 
 
-    selectedFoodItemsList.forEach(item => {
-      addMealEntry(mealTypeToAdd, item, 1); 
-    });
-    
-    navigate('/daily-meals', { state: { date: selectedDateFromState } });
+      await Promise.all(
+        selectedFoodItemsList.map(item => addMealEntry(mealTypeToAdd, item, 1))
+      );
+      
+      navigate('/daily-meals', { state: { date: selectedDateFromState } });
+    } catch (error) {
+      console.error('Failed to add meals:', error);
+      setIsSubmitting(false);
+    }
   };
 
   const handleViewDetails = (foodId: string) => {
