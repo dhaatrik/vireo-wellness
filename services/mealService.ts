@@ -8,7 +8,7 @@ export async function getMeals(date: string) {
   return response.json();
 }
 
-export async function logMeal(meal: { foodItemId: string; quantity: number }) {
+export async function logMeal(meal: { foodItemId: string; quantity: number; mealType: string }) {
   const response = await fetch(`${API_BASE_URL}/meals`, {
     method: 'POST',
     headers: {

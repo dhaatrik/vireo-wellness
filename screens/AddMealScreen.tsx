@@ -13,9 +13,10 @@ interface SelectionBarProps {
   numSelected: number;
   totalSelectedCalories: number;
   onAdd: () => void;
+  isSubmitting: boolean;
 }
 
-const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd }: SelectionBarProps) => (
+const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd, isSubmitting }: SelectionBarProps) => (
   <AnimatePresence>
     {numSelected > 0 && (
       <motion.div
@@ -27,15 +28,16 @@ const SelectionBar = ({ numSelected, totalSelectedCalories, onAdd }: SelectionBa
         <button
           type="button"
           onClick={onAdd}
-          className="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98] flex items-center justify-between"
+          disabled={isSubmitting}
+          className={`w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 px-4 rounded-2xl shadow-xl shadow-emerald-500/20 transition-all duration-300 active:scale-[0.98] flex items-center justify-between ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
         >
           <div className="flex items-center">
-            <div className="bg-slate-950/20 px-3 py-1 rounded-lg mr-3">
-              {numSelected}
+            <div className="bg-slate-950/20 px-3 py-1 rounded-lg mr-3 min-w-8 flex justify-center">
+              {isSubmitting ? '...' : numSelected}
             </div>
-            <span>Add Selected</span>
+            <span>{isSubmitting ? 'Adding...' : 'Add Selected'}</span>
           </div>
-          <span className="bg-slate-950/10 px-3 py-1 rounded-lg">{totalSelectedCalories} kcal</span>
+          {!isSubmitting && <span className="bg-slate-950/10 px-3 py-1 rounded-lg">{totalSelectedCalories} kcal</span>}
         </button>
       </motion.div>
     )}
@@ -297,6 +299,7 @@ const AddMealScreen = () => {
         numSelected={numSelected}
         totalSelectedCalories={totalSelectedCalories}
         onAdd={handleAddSelectedItems}
+        isSubmitting={isSubmitting}
       />
       </div>
     </div>
